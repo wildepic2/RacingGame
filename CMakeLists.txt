@@ -121,7 +121,13 @@ set(BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(raylib)
 
 # 4. Build Configuration
-add_executable(${PROJECT_NAME} ${MAIN_FILE})
+add_executable(${PROJECT_NAME} ${MAIN_FILE}
+        src/state.h
+        src/menuManager.c
+        src/menuManager.h
+        src/gameManager.c
+        src/gameManager.h
+        src/state.c)
 target_link_libraries(${PROJECT_NAME} PRIVATE raylib)
 
 # Compiler Warnings
