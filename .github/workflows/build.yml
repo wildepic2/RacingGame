@@ -73,7 +73,7 @@ jobs:
     - name: Create Release
       uses: softprops/action-gh-release@v1
       with:
-        files: artifacts/**/*
+        files: artifacts/
         draft: false
         prerelease: false
       env:
