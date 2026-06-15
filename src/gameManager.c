@@ -5,8 +5,16 @@
 #include "raylib.h"
 
 #include "gameManager.h"
+
+#include "initTextures.h"
 #include "state.h"
 
+//Runs on every frame
 void whilePlaying() {}
+//Runs every frame when the gameState is Gameover
 void gameOver() {}
-void initGame() {}
+//Runs on init game
+void initGame() {
+    //Inits the Game Textures
+    initTextures();
+}

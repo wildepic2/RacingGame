@@ -7,5 +7,6 @@
 
 void displayMainMenu();
 void displayGameoverMenu();
+void error();
 
 #endif //RACINGGAME_MAINMENU_H
