@@ -1,0 +1,60 @@
+name: Build and Package
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        include:
+          - os: ubuntu-latest
+            artifact_name: RacingGame-linux-v${{ github.run_number }}
+            executable_name: RacingGame
+          - os: windows-latest
+            artifact_name: RacingGame-windows-v${{ github.run_number }}
+            executable_name: RacingGame.exe
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - uses: actions/checkout@v4
+
+    # This step ensures CMake 4.2 is installed regardless of the runner's default
+    - name: Setup CMake 4.2
+      uses: lukka/get-cmake@latest
+      with:
+        cmakeVersion: 4.2.0
+
+    - name: Install Linux Dependencies
+      if: runner.os == 'Linux'
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libasound2-dev libx11-dev libxinerama-dev libxcursor-dev libxi-dev libxrandr-dev libgl1-mesa-dev libglu1-mesa-dev
+
+    - name: Configure CMake
+      run: cmake -B build -DCMAKE_BUILD_TYPE=Release
+
+    - name: Build
+      run: cmake --build build --config Release
+
+    - name: Prepare Package Folder
+      run: |
+        mkdir dist
+        if [ "${{ runner.os }}" == "Windows" ]; then
+          cp build/Release/${{ matrix.executable_name }} dist/
+        else
+          cp build/${{ matrix.executable_name }} dist/
+        fi
+        if [ -d "assets" ]; then cp -r assets dist/; fi
+      shell: bash
+
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ matrix.artifact_name }}
+        path: dist/
