@@ -2,9 +2,8 @@ name: Build and Package
 
 on:
   push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+    tags:
+      - 'v*'
 
 jobs:
   build:
@@ -13,10 +12,10 @@ jobs:
         os: [ubuntu-latest, windows-latest]
         include:
           - os: ubuntu-latest
-            artifact_name: RacingGame-linux-v${{ github.run_number }}
+            artifact_name: RacingGame-linux-${{ github.ref_name }}
             executable_name: RacingGame
           - os: windows-latest
-            artifact_name: RacingGame-windows-v${{ github.run_number }}
+            artifact_name: RacingGame-windows-${{ github.ref_name }}
             executable_name: RacingGame.exe
 
     runs-on: ${{ matrix.os }}
@@ -58,3 +57,24 @@ jobs:
       with:
         name: ${{ matrix.artifact_name }}
         path: dist/
+
+  create-release:
+    needs: build
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Download All Artifacts
+      uses: actions/download-artifact@v4
+      with:
+        path: artifacts
+    
+    - name: Create Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: artifacts/**/*
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
