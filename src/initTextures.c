@@ -11,11 +11,22 @@ Texture2D textures[textureCount];
 
 void initTextures() {
     //Properties for Textures and where are they saved
-    const char textureLocation[textureCount][100] = {"assets/car.jpg"};
-    Vector2 size[textureCount] = {{50, 50}};
+    const char textureLocation[textureCount][100] = {
+        {"assets/car_up.png"} ,
+        {"assets/car_down.png"},
+        {"assets/car_left.png"},
+        {"assets/car_right.png"}
+
+    } ;
+    Vector2 size[textureCount] = {
+        {96, 179},
+        {96, 179},
+        {179, 96},
+        {176, 96},
+    };
 
     //Inits Textures in the correct Size and if one Texture want load sucessfully the game goes to error srtate
-    for (int i = 0; i < 1; i++) {
+    for (int i = 0; i < textureCount; i++) {
         Image field = LoadImage(textureLocation[i]);
 
         ImageResize(&field, size[i].x, size[i].y);

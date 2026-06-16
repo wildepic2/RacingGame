@@ -7,7 +7,7 @@
 #include "raylib.h"
 
 //Defines how maby textures they are
-#define textureCount 10
+#define textureCount 4
 //Texture2D array where all textures are saved
 extern Texture2D textures[textureCount];
 void initTextures();

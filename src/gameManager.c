@@ -9,8 +9,8 @@
 #include "state.h"
 
 //Runs on every frame
-void whilePlaying(Vector2 *playerPos, float *playerRotation) {
-    playerCar(playerPos, playerRotation);
+void whilePlaying(Vector2 *playerPos) {
+    playerCar(playerPos);
 }
 
 //Runs every frame when the gameState is Gameover
