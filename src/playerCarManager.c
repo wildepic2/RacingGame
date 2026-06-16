@@ -14,7 +14,7 @@ float speed =0.00f;
 //Acceleration 3 second 0 to 100 kmh
 const float accelerationSpeedFrame = 0.0257f;
 const float deaccelerationSpeedFrame = 0.00136f;
-const float brakeSpeedFrame = 0.0319f;
+const float brakeSpeedFrame = 0.0109f;
 const float maxSpeed = 13.89f;
 
 bool direction[4] = {false, false, false, false};
@@ -114,4 +114,5 @@ void playerCar(Vector2 *pos , float *rotation) {
     carDisacceleration(&speed);
     carMovement(pos, direction);
     float kmhCalculated = speed * 21.6f;
+    DrawText(TextFormat("%0.2f km/h", kmhCalculated), pos->x - 375, pos->y - 375, 40, BLACK);
 }
