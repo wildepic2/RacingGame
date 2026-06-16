@@ -12,6 +12,7 @@
 float speed =0.00f;
 //Top speed 300 kmh
 //Acceleration 3 second 0 to 100 kmh
+//10 Pixel equals 1 meter
 const float accelerationSpeedFrame = 0.0257f;
 const float deaccelerationSpeedFrame = 0.00136f;
 const float brakeSpeedFrame = 0.0109f;
