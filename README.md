@@ -28,7 +28,6 @@ RacingGame/
 └── LICENSE
 ```
 
-
 ## Controls
 
 ## License
