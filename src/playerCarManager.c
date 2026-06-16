@@ -114,5 +114,5 @@ void playerCar(Vector2 *pos , float *rotation) {
     carDisacceleration(&speed);
     carMovement(pos, direction);
     float kmhCalculated = speed * 21.6f;
-    DrawText(TextFormat("%0.2f km/h", kmhCalculated), pos->x - 375, pos->y - 375, 40, BLACK);
+    DrawText(TextFormat("%0.2f km/h", kmhCalculated), pos->x - 355, pos->y - 355, 40, BLACK);
 }
