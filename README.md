@@ -30,7 +30,7 @@ RacingGame/
 
 ## Controls
 - **WASD** to controll the direction of the car.
-
+    * **WA** **WD** **SA** **SD** to move the car diagonally.
 - **Space** to brake the car.
 
 ## License
