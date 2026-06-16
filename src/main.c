@@ -3,10 +3,9 @@
 #include "state.h"
 #include "menuManager.h"
 
-int main(void)
-{
+int main(void) {
     //Inits Variables for Car Pos and Rotation
-    Vector2 playerPosition = { 375, 375 };
+    Vector2 playerPosition = {375, 375};
     float playerRotation = 0;
     //Sets Window Size
     const int screenWidth = 800;

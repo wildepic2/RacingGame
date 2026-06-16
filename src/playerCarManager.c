@@ -9,7 +9,7 @@
 
 #include "initTextures.h"
 
-float speed =0.00f;
+float speed = 0.00f;
 //Top speed 300 kmh
 //Acceleration 3 second 0 to 100 kmh
 //10 Pixel equals 1 meter
@@ -21,7 +21,7 @@ const float maxSpeed = 13.89f;
 bool direction[4] = {false, false, false, false};
 
 //Draws the player Car
-void drawPlayerCar(Vector2 pos , float rotation) {
+void drawPlayerCar(Vector2 pos, float rotation) {
     DrawTextureEx(textures[0], pos, rotation, 1,WHITE);
 }
 
@@ -40,8 +40,7 @@ void carAcceleration(float *speed) {
 void carBrake(float *speed) {
     if (*speed <= 0) {
         speed = 0;
-    }
-    else {
+    } else {
         *speed -= brakeSpeedFrame;
     }
 }
@@ -59,16 +58,14 @@ void playerInput(bool direction[4]) {
     if (IsKeyDown(KEY_W)) {
         direction[3] = false;
         direction[2] = true;
-    }
-    else if (IsKeyDown(KEY_S)) {
+    } else if (IsKeyDown(KEY_S)) {
         direction[2] = false;
         direction[3] = true;
     }
     if (IsKeyDown(KEY_A)) {
         direction[1] = false;
         direction[0] = true;
-    }
-    else if (IsKeyDown(KEY_D)) {
+    } else if (IsKeyDown(KEY_D)) {
         direction[0] = false;
         direction[1] = true;
     }
@@ -78,7 +75,7 @@ void playerInput(bool direction[4]) {
     }
 }
 
-void carMovement(Vector2 *pos , bool direction[4]) {
+void carMovement(Vector2 *pos, bool direction[4]) {
     //Make the car with the speed move into the direction
     if (direction[0]) {
         pos->x -= speed;
@@ -99,8 +96,7 @@ void carDisacceleration(float *speed) {
     if (!IsKeyDown(KEY_A) && !IsKeyDown(KEY_D) && !IsKeyDown(KEY_W) && !IsKeyDown(KEY_S)) {
         if (*speed > 0) {
             *speed -= deaccelerationSpeedFrame;
-        }
-        else {
+        } else {
             *speed = 0;
         }
     }
@@ -108,7 +104,7 @@ void carDisacceleration(float *speed) {
 
 
 //ALl functions for Player Car
-void playerCar(Vector2 *pos , float *rotation) {
+void playerCar(Vector2 *pos, float *rotation) {
     drawPlayerCar(*pos, *rotation);
     playerInput(direction);
     carAcceleration(&speed);

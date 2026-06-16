@@ -5,6 +5,6 @@
 #ifndef RACINGGAME_PLAYERCARMANAGER_H
 #define RACINGGAME_PLAYERCARMANAGER_H
 
-void playerCar(Vector2 *pos , float *rotation);
+void playerCar(Vector2 *pos, float *rotation);
 
 #endif //RACINGGAME_PLAYERCARMANAGER_H

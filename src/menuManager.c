@@ -5,13 +5,10 @@
 #include "menuManager.h"
 
 void displayMainMenu() {
-
 }
 
 void displayGameoverMenu() {
-
 }
 
 void error() {
-
 }

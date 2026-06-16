@@ -9,11 +9,14 @@
 #include "state.h"
 
 //Runs on every frame
-void whilePlaying(Vector2 *playerPos , float *playerRotation) {
+void whilePlaying(Vector2 *playerPos, float *playerRotation) {
     playerCar(playerPos, playerRotation);
 }
+
 //Runs every frame when the gameState is Gameover
-void gameOver() {}
+void gameOver() {
+}
+
 //Runs on init game
 void initGame() {
     //Inits the Game Textures
