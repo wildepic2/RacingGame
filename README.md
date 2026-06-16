@@ -11,6 +11,11 @@ RacingGame/
 │   └── workflows/
 │       └── build.yml
 ├── assets/
+│   └── Formula 1 car and trackset/
+│   └── car_up.png
+│   └── car_down.png
+│   └── car_left.png
+│   └── car_right.png
 ├── src/
 │   └── gameManager.c
 │   └── gameManager.h
