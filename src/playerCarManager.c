@@ -2,6 +2,8 @@
 // Created by wildepic on 15/06/2026.
 //
 
+#include <stdio.h>
+
 #include "raylib.h"
 #include "playerCarManager.h"
 
@@ -111,4 +113,5 @@ void playerCar(Vector2 *pos , float *rotation) {
     carAcceleration(&speed);
     carDisacceleration(&speed);
     carMovement(pos, direction);
+    float kmhCalculated = speed * 21.6f;
 }
