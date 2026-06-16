@@ -29,6 +29,9 @@ RacingGame/
 ```
 
 ## Controls
+- **WASD** to controll the direction of the car.
+
+- **Space** to brake the car.
 
 ## License
 
