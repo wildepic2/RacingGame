@@ -4,8 +4,8 @@
 
 #ifndef RACINGGAME_GAMEMANAGER_H
 #define RACINGGAME_GAMEMANAGER_H
-
-void whilePlaying();
+#include "raylib.h"
+void whilePlaying(Vector2 *playerPos , float *playerRotation);
 void gameOver();
 void initGame();
 

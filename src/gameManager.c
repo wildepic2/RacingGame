@@ -2,15 +2,16 @@
 // Created by wildepic on 15/06/2026.
 //
 
-#include "raylib.h"
-
 #include "gameManager.h"
 
 #include "initTextures.h"
+#include "playerCarManager.h"
 #include "state.h"
 
 //Runs on every frame
-void whilePlaying() {}
+void whilePlaying(Vector2 *playerPos , float *playerRotation) {
+    playerCar(playerPos, playerRotation);
+}
 //Runs every frame when the gameState is Gameover
 void gameOver() {}
 //Runs on init game

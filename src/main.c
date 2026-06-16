@@ -5,6 +5,9 @@
 
 int main(void)
 {
+    //Inits Variables for Car Pos and Rotation
+    Vector2 playerPosition = { 400, 400 };
+    float playerRotation = 0;
     //Sets Window Size
     const int screenWidth = 800;
     const int screenHeight = 800;
@@ -21,9 +24,10 @@ int main(void)
         switch (gameState) {
             case MAIN_MENU:
                 displayMainMenu();
+                gameState = PLAYING;
                 break;
             case PLAYING:
-                whilePlaying();
+                whilePlaying(&playerPosition, &playerRotation);
                 break;
             case GAME_OVER:
                 gameOver();
