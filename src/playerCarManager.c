@@ -119,25 +119,25 @@ void carDisacceleration(float *speed) {
 
 //sets the direction of the car where to move
 void carDirection(char directionText[], bool direction[4]) {
-    //Resets rotation to 0
     rotation = 0;
+    strcpy(directionText, "up");
     //Left Up diagonal
     if (direction[0] && direction[2]) {
         strcpy(directionText, "left");
         rotation = 45;
     }
     //Right Up diagonal
-    if (direction[1] && direction[2]) {
-        strcpy(directionText, "right");
-        rotation = -45;
+    else if (direction[1] && direction[2]) {
+        strcpy(directionText, "up");
+        rotation = 45;
     }
     //Left Down diagonal
-    if (direction[0] && direction[3]) {
-        strcpy(directionText, "left");
-        rotation = -45;
+    else if (direction[0] && direction[3]) {
+        strcpy(directionText, "down");
+        rotation = 45;
     }
     //Right Down diagonal
-    if (direction[1] && direction[3]) {
+    else if (direction[1] && direction[3]) {
         strcpy(directionText, "right");
         rotation = 45;
     }
@@ -156,10 +156,6 @@ void carDirection(char directionText[], bool direction[4]) {
     //Down
     else if (direction[3]) {
         strcpy(directionText, "down");
-    }
-    //Default case if there is no direction to still show the car
-    else {
-        strcpy(directionText, "up");
     }
 }
 
