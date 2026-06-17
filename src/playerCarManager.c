@@ -16,7 +16,7 @@ float speed = 0.00f;
 //Acceleration 3 second 0 to 100 kmh
 const float accelerationSpeedFrame = 0.0959f;
 const float deaccelerationSpeedFrame = 0.00508f;
-const float brakeSpeedFrame = 0.0407f;
+const float brakeSpeedFrame = 0.1059f;
 const float maxSpeed = 51.81f;
 //Saves which button of WASD where saved
 bool direction[4] = {false, false, false, false};
@@ -161,12 +161,30 @@ void carDirection(char directionText[], bool direction[4]) {
 
 //All functions for Player Car
 void playerCar(Vector2 *pos) {
+    //Declares Camera
+    Camera2D camera = {0};
+    //Declares Camera Infos
+    camera.target = (Vector2){pos->x, pos->y};
+    camera.offset = (Vector2){375, 375};
+    camera.rotation = 0.0f;
+    camera.zoom = 1.0f;
+    //Starts the camera mode
+    BeginMode2D(camera);
+    //Draws the car
     drawPlayerCar(*pos, directionText);
+    //Calculates the kmh
+    float kmhCalculated = speed * 5.79f;
+    //Draws The KMH
+    DrawText(TextFormat("%0.2f km/h", kmhCalculated), pos->x - 355, pos->y - 355, 40, BLACK);
+    //Stop the camera mode
+    EndMode2D();
+
     playerInput(direction);
     carAcceleration(&speed);
     carDisacceleration(&speed);
     carMovement(pos, direction);
     carDirection(directionText, direction);
-    float kmhCalculated = speed * 5.79f;
-    DrawText(TextFormat("%0.2f km/h", kmhCalculated), pos->x - 355, pos->y - 355, 40, BLACK);
+
+    //Rectangle for testing
+    DrawRectangleLines(0 - pos->x, 0 - pos->y, 800, 600, GREEN);
 }
