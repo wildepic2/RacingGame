@@ -5,6 +5,8 @@
 #ifndef RACINGGAME_PLAYERCARMANAGER_H
 #define RACINGGAME_PLAYERCARMANAGER_H
 
-void playerCar(Vector2 *pos);
+void playerCar(Vector2 *pos, Camera2D *camera);
+
+void updateCamera(Camera2D *camera, Vector2 *pos);
 
 #endif //RACINGGAME_PLAYERCARMANAGER_H

@@ -6,7 +6,7 @@
 #define RACINGGAME_GAMEMANAGER_H
 #include "raylib.h"
 
-void whilePlaying(Vector2 *playerPos);
+void whilePlaying(Vector2 *playerPos, Camera2D *camera);
 
 void gameOver();
 

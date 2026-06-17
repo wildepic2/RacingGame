@@ -159,17 +159,16 @@ void carDirection(char directionText[], bool direction[4]) {
     }
 }
 
+void updateCamera(Camera2D *camera, Vector2 *pos) {
+    camera->target = (Vector2){pos->x, pos->y};
+    camera->offset = (Vector2){375, 375};
+}
+
 //All functions for Player Car
-void playerCar(Vector2 *pos) {
-    //Declares Camera
-    Camera2D camera = {0};
-    //Declares Camera Infos
-    camera.target = (Vector2){pos->x, pos->y};
-    camera.offset = (Vector2){375, 375};
-    camera.rotation = 0.0f;
-    camera.zoom = 1.0f;
+void playerCar(Vector2 *pos, Camera2D *camera) {
+    updateCamera(camera, pos);
     //Starts the camera mode
-    BeginMode2D(camera);
+    BeginMode2D(*camera);
     //Draws the car
     drawPlayerCar(*pos, directionText);
     //Calculates the kmh

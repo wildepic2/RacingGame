@@ -4,6 +4,11 @@
 #include "menuManager.h"
 
 int main(void) {
+    //Declares Camera
+    Camera2D camera = {0};
+    //Declares Camera Infos
+    camera.rotation = 0.0f;
+    camera.zoom = 1.0f;
     //Inits Variables for Car Pos and Rotation
     Vector2 playerPosition = {375, 375};
     //Sets Window Size
@@ -25,7 +30,7 @@ int main(void) {
                 gameState = PLAYING;
                 break;
             case PLAYING:
-                whilePlaying(&playerPosition);
+                whilePlaying(&playerPosition, &camera);
                 break;
             case GAME_OVER:
                 gameOver();
