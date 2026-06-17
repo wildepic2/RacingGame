@@ -185,6 +185,6 @@ void playerCar(Vector2 *pos) {
     carMovement(pos, direction);
     carDirection(directionText, direction);
 
-    //Rectangle for testing
+    //Rectangle for testing the camera
     DrawRectangleLines(0 - pos->x, 0 - pos->y, 800, 600, GREEN);
 }
