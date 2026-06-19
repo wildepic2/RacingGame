@@ -27,7 +27,6 @@ int main(void) {
         switch (gameState) {
             case MAIN_MENU:
                 displayMainMenu();
-                gameState = PLAYING;
                 break;
             case PLAYING:
                 whilePlaying(&playerPosition, &camera);
