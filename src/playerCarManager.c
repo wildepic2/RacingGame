@@ -183,7 +183,4 @@ void playerCar(Vector2 *pos, Camera2D *camera) {
     carDisacceleration(&speed);
     carMovement(pos, direction);
     carDirection(directionText, direction);
-
-    //Rectangle for testing the camera
-    DrawRectangleLines(0 - pos->x, 0 - pos->y, 800, 600, GREEN);
 }

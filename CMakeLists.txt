@@ -131,7 +131,9 @@ add_executable(${PROJECT_NAME} ${MAIN_FILE}
         src/playerCarManager.c
         src/playerCarManager.h
         src/initTextures.c
-        src/initTextures.h)
+        src/initTextures.h
+        src/mapManager.c
+        src/mapManager.h)
 target_link_libraries(${PROJECT_NAME} PRIVATE raylib)
 
 # Compiler Warnings

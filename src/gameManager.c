@@ -6,10 +6,13 @@
 
 #include "initTextures.h"
 #include "playerCarManager.h"
+#include "mapManager.h"
 #include "state.h"
 
 //Runs on every frame
 void whilePlaying(Vector2 *playerPos, Camera2D *camera) {
+    //Draws The Map
+    drawMap(playerPos);
     playerCar(playerPos, camera);
 }
 
