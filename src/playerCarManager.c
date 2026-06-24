@@ -10,6 +10,8 @@
 #include <string.h>
 
 #include "initTextures.h"
+#include "mapManager.h"
+#include "state.h"
 
 float speed = 0.00f;
 //Top speed 300 kmh
@@ -18,6 +20,8 @@ const float accelerationSpeedFrame = 0.0959f;
 const float deaccelerationSpeedFrame = 0.00508f;
 const float brakeSpeedFrame = 0.1059f;
 const float maxSpeed = 51.81f;
+
+int currentTexture = 0;
 //Saves which button of WASD where saved
 bool direction[4] = {false, false, false, false};
 //Saved the direction the car os showing
@@ -164,6 +168,34 @@ void updateCamera(Camera2D *camera, Vector2 *pos) {
     camera->offset = (Vector2){375, 375};
 }
 
+void drawMapAsCar(Vector2 *pos) {
+    //select texutre arrow keys
+    if (IsKeyPressed(KEY_UP)) {
+        if (currentTexture < textureCount -1) {
+            currentTexture++;
+        }
+    }
+    if (IsKeyPressed(KEY_DOWN)) {
+        if (currentTexture > 0) {
+            currentTexture--;
+        }
+    }
+    //Draw selected texture and shows you are in dev modus
+    DrawText("DEV MODUS", pos->x - 200, pos->y + 290, 80, BLACK);
+    DrawText(TextFormat("Current Texture ID: %d", currentTexture), pos->x - 355, pos->y - 300, 40, BLACK);
+    //Calculates on which grid square you are and if you press P you draw the selected texture there
+    for (int i = 0; i < 100; i++) {
+        for (int ii = 0; ii < 100; ii++) {
+            if (pos->x < i * 384 && pos->y < ii * 384 && pos->x > (i * 384) - 384 && pos->y > (ii * 384) -384) {
+                if (IsKeyDown(KEY_P)) {
+                    mapTextureLocation[i][ii] = currentTexture;
+                }
+            }
+        }
+    }
+
+}
+
 //All functions for Player Car
 void playerCar(Vector2 *pos, Camera2D *camera) {
     updateCamera(camera, pos);
@@ -173,6 +205,10 @@ void playerCar(Vector2 *pos, Camera2D *camera) {
     drawPlayerCar(*pos, directionText);
     //Calculates the kmh
     float kmhCalculated = speed * 5.79f;
+    //IF dev modus it allows to draw the map and export it as map string
+    if (isDev) {
+        drawMapAsCar(pos);
+    }
     //Draws The KMH
     DrawText(TextFormat("%0.2f km/h", kmhCalculated), pos->x - 355, pos->y - 355, 40, BLACK);
     //Stop the camera mode
@@ -183,4 +219,6 @@ void playerCar(Vector2 *pos, Camera2D *camera) {
     carDisacceleration(&speed);
     carMovement(pos, direction);
     carDirection(directionText, direction);
+
+
 }

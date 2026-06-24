@@ -10,5 +10,6 @@ typedef enum GameState {
 } GameState;
 
 extern GameState gameState;
+extern bool isDev;
 
 #endif // RACINGGAME_STATE_H
