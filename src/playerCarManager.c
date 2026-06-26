@@ -13,6 +13,8 @@
 #include "initTextures.h"
 #include "mapManager.h"
 #include "state.h"
+#include "autoSaveMapDevMode.h"
+#include "mapString.h"
 
 float speed = 0.00f;
 //Top speed 300 kmh
@@ -170,6 +172,16 @@ void updateCamera(Camera2D *camera, Vector2 *pos) {
 }
 //It allows the car in dev modus to draw the map and export it
 void drawMapAsCar(Vector2 *pos) {
+    //Resets full dev Map back to grass
+    //And autosaves the just grass to the auto dev save
+    if (IsKeyPressed(KEY_R)) {
+        for (int i = 0; i < 100; i++) {
+            for (int ii = 0; ii < 100; ii++) {
+                mapTextureLocation[i][ii] = 4;
+            }
+        }
+        saveMap();
+    }
     //Exports the map string into the cli
     if (IsKeyPressed(KEY_F1)) {
         printf("\n\n\n\n\n\n\n\n\n");
@@ -206,9 +218,10 @@ void drawMapAsCar(Vector2 *pos) {
     //Calculates on which grid square you are and if you press P you draw the selected texture there
     for (int i = 0; i < 100; i++) {
         for (int ii = 0; ii < 100; ii++) {
-            if (pos->x < i * 384 && pos->y < ii * 384 && pos->x > (i * 384) - 384 && pos->y > (ii * 384) - 384) {
+            if (pos->x < (i * 384) + originX && pos->y < (ii * 384) + originY && pos->x > ((i * 384) - 384) + originX && pos->y > ((ii * 384) - 384) + originY) {
                 if (IsKeyDown(KEY_P)) {
                     mapTextureLocation[i][ii] = currentTexture;
+                    saveMap();
                 }
             }
         }

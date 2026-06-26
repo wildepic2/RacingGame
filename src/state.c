@@ -5,4 +5,4 @@
 #include "state.h"
 //Declaration gameState
 GameState gameState = MAIN_MENU;
-bool isDev = true;
+bool isDev = false;

@@ -10,17 +10,17 @@
 
 void displayMainMenu() {
     //Grass on Startmenu
-    DrawTexture(textures[5], 0, 0, WHITE);
-    DrawTexture(textures[5], 0, 382, WHITE);
-    DrawTexture(textures[5], 0, 420, WHITE);
-    DrawTexture(textures[5], 500, 0, WHITE);
-    DrawTexture(textures[5], 500, 382, WHITE);
-    DrawTexture(textures[5], 500, 420, WHITE);
+    DrawTexture(textures[4], 0, 0, WHITE);
+    DrawTexture(textures[4], 0, 382, WHITE);
+    DrawTexture(textures[4], 0, 420, WHITE);
+    DrawTexture(textures[4], 500, 0, WHITE);
+    DrawTexture(textures[4], 500, 382, WHITE);
+    DrawTexture(textures[4], 500, 420, WHITE);
 
     //Road on Startmenu
-    DrawTexture(textures[4], 206, 0, WHITE);
-    DrawTexture(textures[4], 206, 384, WHITE);
-    DrawTexture(textures[4], 206, 500, WHITE);
+    DrawTexture(textures[5], 206, 0, WHITE);
+    DrawTexture(textures[5], 206, 384, WHITE);
+    DrawTexture(textures[5], 206, 500, WHITE);
 
     //Title
     DrawText("Racing Game", 100, 0, 100, BLACK);
@@ -34,6 +34,11 @@ void displayMainMenu() {
     DrawText("D", 470, 400, 40,DARKBLUE);
     DrawText("S", 385, 510, 40,DARKBLUE);
     DrawText("SPACE TO BRAKE", 220, 630, 40,BLACK);
+
+    //KeyCombo Activate DEV mode
+    if (IsKeyDown(KEY_LEFT) && IsKeyDown(KEY_RIGHT)) {
+        isDev = true;
+    }
 
     //If you press any of controll keys the game starts
     if (IsKeyDown(KEY_A) || IsKeyDown(KEY_D) || IsKeyDown(KEY_S) || IsKeyDown(KEY_W) || IsKeyDown(KEY_SPACE)) {

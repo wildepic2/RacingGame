@@ -134,7 +134,10 @@ add_executable(${PROJECT_NAME} ${MAIN_FILE}
         src/initTextures.h
         src/mapManager.c
         src/mapManager.h
-        src/mapString.h)
+        src/mapString.h
+        src/autoSaveMapDevMode.c
+        src/autoSaveMapDevMode.h
+        src/mapString.c)
 target_link_libraries(${PROJECT_NAME} PRIVATE raylib)
 
 # Compiler Warnings
