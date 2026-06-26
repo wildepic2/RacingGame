@@ -199,9 +199,10 @@ void drawMapAsCar(Vector2 *pos) {
             currentTexture--;
         }
     }
-    //Draw selected texture and shows you are in dev modus
+    //Draw selected texture and shows you are in dev modusw
     DrawText("DEV MODUS", pos->x - 200, pos->y + 290, 80, BLACK);
     DrawText(TextFormat("Current Texture ID: %d", currentTexture), pos->x - 355, pos->y - 300, 40, BLACK);
+    DrawText(textureLocation[currentTexture], pos->x - 355, pos->y - 250, 40 ,BLACK);
     //Calculates on which grid square you are and if you press P you draw the selected texture there
     for (int i = 0; i < 100; i++) {
         for (int ii = 0; ii < 100; ii++) {
