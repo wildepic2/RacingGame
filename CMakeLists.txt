@@ -10,8 +10,9 @@ set(WORKFLOW_CONTENT [=[
 name: Build and Package
 
 on:
-  tags:
-       - 'v*'
+  push:
+    tags:
+        - 'v*'
 
 jobs:
   build:
