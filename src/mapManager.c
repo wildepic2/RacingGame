@@ -8,15 +8,24 @@
 
 #include "initTextures.h"
 #include "raylib.h"
+#include "mapString.h"
 
 //Defines for every tile on the grid the size
 #define gridWidth 384
 #define gridHeight 384
-//Origin for Tile Drawing
-const int originX = 0;
-const int originY = 0;
 //Stores which tile ID to use for which tile
 int mapTextureLocation[100][100] = {0};
+
+//Loads the map string into the mapTextureLocation Matrix
+void mapStringParser() {
+    int j = 0;
+    for (int i = 0; i < 100; i++) {
+        for (int ii = 0; ii < 100; ii++) {
+            mapTextureLocation[i][ii] = mapString[j];
+            j++;
+        }
+    }
+}
 
 void drawMap(Vector2 *pos) {
     //Draws the Tiles on Right place

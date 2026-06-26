@@ -3,7 +3,7 @@ name: Build and Package
 on:
   push:
     tags:
-      - 'v*'
+       - 'v*'
 
 jobs:
   build:
@@ -12,10 +12,10 @@ jobs:
         os: [ubuntu-latest, windows-latest]
         include:
           - os: ubuntu-latest
-            artifact_name: RacingGame-linux-${{ github.ref_name }}
+            artifact_name: RacingGame-linux-v${{ github.run_number }}
             executable_name: RacingGame
           - os: windows-latest
-            artifact_name: RacingGame-windows-${{ github.ref_name }}
+            artifact_name: RacingGame-windows-v${{ github.run_number }}
             executable_name: RacingGame.exe
 
     runs-on: ${{ matrix.os }}
@@ -57,50 +57,3 @@ jobs:
       with:
         name: ${{ matrix.artifact_name }}
         path: dist/
-
-
-  create-release:
-      needs: build
-      runs-on: ubuntu-latest
-
-      steps:
-        - uses: actions/checkout@v4
-
-        - name: Download All Artifacts
-          uses: actions/download-artifact@v4
-          with:
-            path: artifacts
-
-        - name: Fix Linux Executable Permissions
-          run: |
-            find artifacts -type f -name "RacingGame" -exec chmod +x {} \;
-
-        - name: Show Downloaded Artifacts
-          run: find artifacts -maxdepth 3 -type f -print
-
-        - name: Zip Downloaded Artifacts
-          run: |
-            mkdir -p release-files
-            
-            for dir in artifacts/*; do
-              if [ -d "$dir" ]; then
-                artifact_name="$(basename "$dir")"
-                echo "Zipping $artifact_name"
-            
-                cd "$dir"
-                zip -r "../../release-files/${artifact_name}.zip" .
-                cd ../..
-              fi
-            done
-            
-            echo "Release files:"
-            ls -la release-files
-
-        - name: Create Release
-          uses: softprops/action-gh-release@v1
-          with:
-            files: release-files/*.zip
-            draft: false
-            prerelease: false
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -24,4 +24,5 @@ void gameOver() {
 void initGame() {
     //Inits the Game Textures
     initTextures();
+    mapStringParser();
 }

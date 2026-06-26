@@ -11,6 +11,7 @@
 #define mapHeight 100
 
 void drawMap(Vector2 *pos);
+void mapStringParser();
 extern int mapTextureLocation[mapWidth][mapHeight];
 
 #endif //RACINGGAME_MAPMANAGER_H

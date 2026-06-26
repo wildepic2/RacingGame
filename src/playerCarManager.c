@@ -7,6 +7,7 @@
 #include "raylib.h"
 #include "playerCarManager.h"
 
+#include <stdlib.h>
 #include <string.h>
 
 #include "initTextures.h"
@@ -167,11 +168,29 @@ void updateCamera(Camera2D *camera, Vector2 *pos) {
     camera->target = (Vector2){pos->x, pos->y};
     camera->offset = (Vector2){375, 375};
 }
-
+//It allows the car in dev modus to draw the map and export it
 void drawMapAsCar(Vector2 *pos) {
-    //select texutre arrow keys
+    //Exports the map string into the cli
+    if (IsKeyPressed(KEY_F1)) {
+        printf("\n\n\n\n\n\n\n\n\n");
+        printf("MAP STRING\n");
+        for (int i = 0; i < 100; i++) {
+            for (int ii = 0; ii < 100; ii++) {
+                int num = mapTextureLocation[i][ii];
+                printf("%d", num);
+                if (ii == 99 && i == 99) {
+                    //exit(0);
+                    printf("\n");
+                }
+                else {
+                    printf(", ");
+                }
+            }
+        }
+    }
+    //select texture arrow keys
     if (IsKeyPressed(KEY_UP)) {
-        if (currentTexture < textureCount -1) {
+        if (currentTexture < textureCount - 1) {
             currentTexture++;
         }
     }
@@ -186,14 +205,13 @@ void drawMapAsCar(Vector2 *pos) {
     //Calculates on which grid square you are and if you press P you draw the selected texture there
     for (int i = 0; i < 100; i++) {
         for (int ii = 0; ii < 100; ii++) {
-            if (pos->x < i * 384 && pos->y < ii * 384 && pos->x > (i * 384) - 384 && pos->y > (ii * 384) -384) {
+            if (pos->x < i * 384 && pos->y < ii * 384 && pos->x > (i * 384) - 384 && pos->y > (ii * 384) - 384) {
                 if (IsKeyDown(KEY_P)) {
                     mapTextureLocation[i][ii] = currentTexture;
                 }
             }
         }
     }
-
 }
 
 //All functions for Player Car
@@ -219,6 +237,4 @@ void playerCar(Vector2 *pos, Camera2D *camera) {
     carDisacceleration(&speed);
     carMovement(pos, direction);
     carDirection(directionText, direction);
-
-
 }
