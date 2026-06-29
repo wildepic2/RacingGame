@@ -16,8 +16,8 @@
 //Stores which tile ID to use for which tile
 int mapTextureLocation[100][100] = {0};
 
-const int originX = 0;
-const int originY = 0;
+int originX = 100000;
+int originY = 100000;
 
 //Loads the map string into the mapTextureLocation Matrix
 void mapStringParser() {
@@ -28,6 +28,8 @@ void mapStringParser() {
             j++;
         }
     }
+    originX = mapString[j];
+    originY = mapString[j+1];
 }
 
 void drawMap(Vector2 *pos) {

@@ -191,7 +191,7 @@ void drawMapAsCar(Vector2 *pos) {
                 int num = mapTextureLocation[i][ii];
                 printf("%d", num);
                 if (ii == 99 && i == 99) {
-                    //exit(0);
+                    printf(", %d, %d" , originX, originY);
                     printf("\n");
                 }
                 else {
@@ -210,6 +210,15 @@ void drawMapAsCar(Vector2 *pos) {
         if (currentTexture > 0) {
             currentTexture--;
         }
+    }
+    //If key O is down you can set in console the origin coords
+    if (IsKeyDown(KEY_O)) {
+        printf("Enter new Origin X: ");
+        scanf("%d", &originX);
+        printf("Enter new Origin Y: ");
+        scanf("%d", &originY);
+        printf("New Origin X: %d\nNew Origin Y: %d\n", originX, originY);
+        saveMap();
     }
     //Draw selected texture and shows you are in dev modusw
     DrawText("DEV MODUS", pos->x - 200, pos->y + 290, 80, BLACK);
