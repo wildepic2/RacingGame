@@ -11,9 +11,8 @@ name: Build and Package
 
 on:
   push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+    tags:
+        - 'v*'
 
 jobs:
   build:
