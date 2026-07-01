@@ -1,3 +1,4 @@
+#include "errorManager.h"
 #include "gameManager.h"
 #include "raylib.h"
 #include "state.h"
@@ -35,7 +36,8 @@ int main(void) {
                 gameOver();
                 displayGameoverMenu();
                 break;
-            case INIT_ERROR:
+            case ERROR_STATE:
+                errorMenu();
                 break;
         }
 

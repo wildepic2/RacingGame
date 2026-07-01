@@ -6,7 +6,7 @@ typedef enum GameState {
     PLAYING,
     GAME_OVER,
     MAIN_MENU,
-    INIT_ERROR
+    ERROR_STATE
 } GameState;
 
 extern GameState gameState;

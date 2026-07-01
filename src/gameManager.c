@@ -25,6 +25,7 @@ void whilePlaying(Vector2 *playerPos, Camera2D *camera) {
 
 //Runs every frame when the gameState is Gameover
 void gameOver() {
+
 }
 
 //Runs on init game

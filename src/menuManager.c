@@ -48,6 +48,3 @@ void displayMainMenu() {
 
 void displayGameoverMenu() {
 }
-
-void error() {
-}

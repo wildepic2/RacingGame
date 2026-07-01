@@ -101,5 +101,4 @@ void drawMapAsCar(Vector2 *pos) {
     drawDevModeText(pos);
     //Calculates on which grid square you are and if you press P you draw the selected texture there
     drawTexture(pos);
-
 }

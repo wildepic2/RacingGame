@@ -6,6 +6,11 @@
 #include "state.h"
 
 #include <stddef.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include "errorManager.h"
 
 Texture2D textures[textureCount];
 
@@ -58,9 +63,16 @@ void initTextures() {
     //Inits Textures in the correct Size and if one Texture want load sucessfully the game goes to error srtate
     for (int i = 0; i < textureCount; i++) {
         Image field = LoadImage(textureLocation[i]);
-
         ImageResize(&field, size[i].x, size[i].y);
         textures[i] = LoadTextureFromImage(field);
+
+        if (textures[i].id == 0) {
+            gameState = ERROR_STATE;
+            errorType = INIT_ERROR;
+            strcpy(errorMessage, TextFormat("Texture Missing: %s" , textureLocation[i]));
+            break;
+        }
+
         UnloadImage(field);
     }
 }
