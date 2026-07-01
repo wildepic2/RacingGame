@@ -11,6 +11,7 @@
 #include "mapString.h"
 
 int currentTexture = 0;
+int currentMode = 0;
 
 void resetMap() {
     if (IsKeyPressed(KEY_R)) {
@@ -32,10 +33,9 @@ void exportMap() {
                 int num = mapTextureLocation[i][ii];
                 printf("%d", num);
                 if (ii == 99 && i == 99) {
-                    printf(", %d, %d" , originX, originY);
+                    printf(", %d, %d", originX, originY);
                     printf("\n");
-                }
-                else {
+                } else {
                     printf(", ");
                 }
             }
@@ -69,19 +69,61 @@ void enterOrigin() {
 
 void drawDevModeText(Vector2 *pos) {
     DrawText("DEV MODUS", pos->x - 200, pos->y + 290, 80, BLACK);
-    DrawText(TextFormat("Current Texture ID: %d", currentTexture), pos->x - 355, pos->y - 300, 40, BLACK);
-    DrawText(textureLocation[currentTexture], pos->x - 355, pos->y - 250, 40 ,BLACK);
+    DrawText(TextFormat("Current MODE: "), pos->x - 355, pos->y - 300, 40, BLACK);
+    switch (currentMode) {
+        case 0:
+            DrawText(TextFormat("DRAWING"), pos->x - 20, pos->y - 300, 40, BLACK);
+            break;
+
+        case 1:
+            DrawText(TextFormat("Mark Lines"), pos->x - 20, pos->y - 300, 40, BLACK);
+            break;
+    }
 }
 
 void drawTexture(Vector2 *pos) {
     for (int i = 0; i < 100; i++) {
         for (int ii = 0; ii < 100; ii++) {
-            if (pos->x < (i * 384) + originX && pos->y < (ii * 384) + originY && pos->x > ((i * 384) - 384) + originX && pos->y > ((ii * 384) - 384) + originY) {
+            if (pos->x < (i * 384) + originX && pos->y < (ii * 384) + originY && pos->x > ((i * 384) - 384) + originX &&
+                pos->y > ((ii * 384) - 384) + originY) {
                 if (IsKeyDown(KEY_P)) {
                     mapTextureLocation[i][ii] = currentTexture;
                     saveMap();
                 }
             }
+        }
+    }
+}
+
+void drawDevMode(Vector2 *pos) {
+    //select texture arrow keys
+    selectTexture();
+    DrawText(TextFormat("Current Texture ID: %d", currentTexture), pos->x - 355, pos->y - 250, 40, BLACK);
+    DrawText(textureLocation[currentTexture], pos->x - 355, pos->y - 200, 40,BLACK);
+    //Calculates on which grid square you are and if you press P you draw the selected texture there
+    drawTexture(pos);
+}
+
+void startStopMarkAddMode() {
+}
+
+void modeSwitch(Vector2 *pos) {
+    if (currentMode == 0) {
+        drawDevMode(pos);
+    } else if (currentMode == 1) {
+        startStopMarkAddMode();
+    }
+}
+
+void selectMode() {
+    if (IsKeyPressed(KEY_LEFT)) {
+        if (currentMode < 1) {
+            currentMode++;
+        }
+    }
+    if (IsKeyPressed(KEY_RIGHT)) {
+        if (currentMode > 0) {
+            currentMode--;
         }
     }
 }
@@ -93,12 +135,11 @@ void drawMapAsCar(Vector2 *pos) {
     resetMap();
     //Exports the map string into the cli
     exportMap();
-    //select texture arrow keys
-    selectTexture();
     //If key O is down you can set in console the origin coords
     enterOrigin();
     //Draw selected texture and shows you are in dev modus
     drawDevModeText(pos);
-    //Calculates on which grid square you are and if you press P you draw the selected texture there
-    drawTexture(pos);
+
+    selectMode();
+    modeSwitch(pos);
 }

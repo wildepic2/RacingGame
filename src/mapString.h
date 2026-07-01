@@ -9,7 +9,7 @@
 extern int originX;
 extern int originY;
 
-//Stores the exported map string that the map can be showns what you made
+//Stores the exported map string that the map can be shows what you made
 extern const int mapString[];
 
 #endif //RACINGGAME_MAPSTRING_H
