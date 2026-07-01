@@ -136,7 +136,8 @@ add_executable(${PROJECT_NAME} ${MAIN_FILE}
         src/mapString.h
         src/autoSaveMapDevMode.c
         src/autoSaveMapDevMode.h
-        src/mapString.c)
+        src/mapString.c
+        src/devMode.c)
 target_link_libraries(${PROJECT_NAME} PRIVATE raylib)
 
 # Compiler Warnings

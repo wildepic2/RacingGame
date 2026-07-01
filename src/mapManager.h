@@ -10,6 +10,9 @@
 #define mapWidth  100
 #define mapHeight 100
 
+extern Vector3 startMark;
+extern Vector3 finishMark;
+
 void drawMap(Vector2 *pos);
 void mapStringParser();
 extern int mapTextureLocation[mapWidth][mapHeight];

@@ -14,6 +14,7 @@
 #include "mapManager.h"
 #include "state.h"
 #include "autoSaveMapDevMode.h"
+#include "devMode.h"
 #include "mapString.h"
 
 float speed = 0.00f;
@@ -24,7 +25,6 @@ const float deaccelerationSpeedFrame = 0.00508f;
 const float brakeSpeedFrame = 0.1059f;
 const float maxSpeed = 51.81f;
 
-int currentTexture = 0;
 //Saves which button of WASD where saved
 bool direction[4] = {false, false, false, false};
 //Saved the direction the car os showing
@@ -33,13 +33,13 @@ int rotation = 0;
 //Draws the player Car
 void drawPlayerCar(Vector2 pos, char text[]) {
     if (strcmp(text, "up") == 0) {
-        DrawTextureEx(textures[0], pos, rotation, 1.0f, WHITE);
+        DrawTextureEx(textures[11], pos, rotation, 1.0f, WHITE);
     } else if (strcmp(text, "down") == 0) {
-        DrawTextureEx(textures[1], pos, rotation, 1.0f, WHITE);
+        DrawTextureEx(textures[12], pos, rotation, 1.0f, WHITE);
     } else if (strcmp(text, "right") == 0) {
-        DrawTextureEx(textures[3], pos, rotation, 1.0f,WHITE);
+        DrawTextureEx(textures[14], pos, rotation, 1.0f,WHITE);
     } else if (strcmp(text, "left") == 0) {
-        DrawTextureEx(textures[2], pos, rotation, 1.0f,WHITE);
+        DrawTextureEx(textures[13], pos, rotation, 1.0f,WHITE);
     }
 }
 
@@ -169,72 +169,6 @@ void carDirection(char directionText[], bool direction[4]) {
 void updateCamera(Camera2D *camera, Vector2 *pos) {
     camera->target = (Vector2){pos->x, pos->y};
     camera->offset = (Vector2){375, 375};
-}
-//It allows the car in dev modus to draw the map and export it
-void drawMapAsCar(Vector2 *pos) {
-    //Resets full dev Map back to grass
-    //And autosaves the just grass to the auto dev save
-    if (IsKeyPressed(KEY_R)) {
-        for (int i = 0; i < 100; i++) {
-            for (int ii = 0; ii < 100; ii++) {
-                mapTextureLocation[i][ii] = 4;
-            }
-        }
-        saveMap();
-    }
-    //Exports the map string into the cli
-    if (IsKeyPressed(KEY_F1)) {
-        printf("\n\n\n\n\n\n\n\n\n");
-        printf("MAP STRING\n");
-        for (int i = 0; i < 100; i++) {
-            for (int ii = 0; ii < 100; ii++) {
-                int num = mapTextureLocation[i][ii];
-                printf("%d", num);
-                if (ii == 99 && i == 99) {
-                    printf(", %d, %d" , originX, originY);
-                    printf("\n");
-                }
-                else {
-                    printf(", ");
-                }
-            }
-        }
-    }
-    //select texture arrow keys
-    if (IsKeyPressed(KEY_UP)) {
-        if (currentTexture < textureCount - 1) {
-            currentTexture++;
-        }
-    }
-    if (IsKeyPressed(KEY_DOWN)) {
-        if (currentTexture > 0) {
-            currentTexture--;
-        }
-    }
-    //If key O is down you can set in console the origin coords
-    if (IsKeyDown(KEY_O)) {
-        printf("Enter new Origin X: ");
-        scanf("%d", &originX);
-        printf("Enter new Origin Y: ");
-        scanf("%d", &originY);
-        printf("New Origin X: %d\nNew Origin Y: %d\n", originX, originY);
-        saveMap();
-    }
-    //Draw selected texture and shows you are in dev modusw
-    DrawText("DEV MODUS", pos->x - 200, pos->y + 290, 80, BLACK);
-    DrawText(TextFormat("Current Texture ID: %d", currentTexture), pos->x - 355, pos->y - 300, 40, BLACK);
-    DrawText(textureLocation[currentTexture], pos->x - 355, pos->y - 250, 40 ,BLACK);
-    //Calculates on which grid square you are and if you press P you draw the selected texture there
-    for (int i = 0; i < 100; i++) {
-        for (int ii = 0; ii < 100; ii++) {
-            if (pos->x < (i * 384) + originX && pos->y < (ii * 384) + originY && pos->x > ((i * 384) - 384) + originX && pos->y > ((ii * 384) - 384) + originY) {
-                if (IsKeyDown(KEY_P)) {
-                    mapTextureLocation[i][ii] = currentTexture;
-                    saveMap();
-                }
-            }
-        }
-    }
 }
 
 //All functions for Player Car

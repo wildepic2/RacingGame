@@ -16,8 +16,11 @@
 //Stores which tile ID to use for which tile
 int mapTextureLocation[100][100] = {0};
 
-int originX = 100000;
-int originY = 100000;
+int originX = 0;
+int originY = 0;
+
+Vector3 startMark;
+Vector3 finishMark;
 
 //Loads the map string into the mapTextureLocation Matrix
 void mapStringParser() {
@@ -29,7 +32,9 @@ void mapStringParser() {
         }
     }
     originX = mapString[j];
-    originY = mapString[j+1];
+    originY = mapString[j + 1];
+    startMark = (Vector3){mapString[j + 2], mapString[j + 3], mapString[j + 4]};
+    finishMark = (Vector3){mapString[j + 5], mapString[j + 6], mapString[j + 7]};
 }
 
 void drawMap(Vector2 *pos) {
@@ -42,4 +47,8 @@ void drawMap(Vector2 *pos) {
                         ((ii * gridHeight) - pos->y) + originY,WHITE);
         }
     }
+    int texture = startMark.z + 7;
+    DrawTexture(textures[texture], (startMark.x * gridWidth) - pos->x, (startMark.y * gridHeight) - pos->y, WHITE);
+    texture = finishMark.z + 15;
+    DrawTexture(textures[texture], (finishMark.x * gridWidth) - pos->x, (finishMark.y * gridHeight) - pos->y, WHITE);
 }

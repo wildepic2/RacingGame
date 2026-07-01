@@ -10,23 +10,23 @@
 
 void displayMainMenu() {
     //Grass on Startmenu
-    DrawTexture(textures[4], 0, 0, WHITE);
-    DrawTexture(textures[4], 0, 382, WHITE);
-    DrawTexture(textures[4], 0, 420, WHITE);
-    DrawTexture(textures[4], 500, 0, WHITE);
-    DrawTexture(textures[4], 500, 382, WHITE);
-    DrawTexture(textures[4], 500, 420, WHITE);
+    DrawTexture(textures[0], 0, 0, WHITE);
+    DrawTexture(textures[0], 0, 382, WHITE);
+    DrawTexture(textures[0], 0, 420, WHITE);
+    DrawTexture(textures[0], 500, 0, WHITE);
+    DrawTexture(textures[0], 500, 382, WHITE);
+    DrawTexture(textures[0], 500, 420, WHITE);
 
     //Road on Startmenu
-    DrawTexture(textures[5], 206, 0, WHITE);
-    DrawTexture(textures[5], 206, 384, WHITE);
-    DrawTexture(textures[5], 206, 500, WHITE);
+    DrawTexture(textures[1], 206, 0, WHITE);
+    DrawTexture(textures[1], 206, 384, WHITE);
+    DrawTexture(textures[1], 206, 500, WHITE);
 
     //Title
     DrawText("Racing Game", 100, 0, 100, BLACK);
 
     //Draw Car
-    DrawTexture(textures[0], 350, 320, WHITE);
+    DrawTexture(textures[11], 350, 320, WHITE);
 
     //Draw Controlls
     DrawText("W", 382, 280, 40,DARKBLUE);
