@@ -72,7 +72,7 @@ void drawDevModeText(Vector2 *pos) {
     DrawText(TextFormat("Current MODE: "), pos->x - 355, pos->y - 300, 40, BLACK);
     switch (currentMode) {
         case 0:
-            DrawText(TextFormat("DRAWING"), pos->x - 20, pos->y - 300, 40, BLACK);
+            DrawText(TextFormat("Placing Tiles Layer 1"), pos->x - 20, pos->y - 300, 40, BLACK);
             break;
 
         case 1:
@@ -95,7 +95,7 @@ void drawTexture(Vector2 *pos) {
     }
 }
 
-void drawDevMode(Vector2 *pos) {
+void layer1DevMode(Vector2 *pos) {
     //select texture arrow keys
     selectTexture();
     DrawText(TextFormat("Current Texture ID: %d", currentTexture), pos->x - 355, pos->y - 250, 40, BLACK);
@@ -109,7 +109,7 @@ void startStopMarkAddMode() {
 
 void modeSwitch(Vector2 *pos) {
     if (currentMode == 0) {
-        drawDevMode(pos);
+        layer1DevMode(pos);
     } else if (currentMode == 1) {
         startStopMarkAddMode();
     }
