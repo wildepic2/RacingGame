@@ -6,6 +6,6 @@
 #define RACINGGAME_DEVMODE_H
 #include "raylib.h"
 
-void drawMapAsCar(Vector2 *pos);
+void drawMapAsCar(Vector2 *pos, char directionText[5]);
 
 #endif //RACINGGAME_DEVMODE_H

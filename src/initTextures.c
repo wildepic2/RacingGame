@@ -5,7 +5,6 @@
 #include "initTextures.h"
 #include "state.h"
 
-#include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -16,25 +15,25 @@ Texture2D textures[textureCount];
 
 //Properties for Textures and where are they saved
 const char textureLocation[textureCount][100] = {
-    {"assets/green_ground.png"},
-    {"assets/straight_road_up_down.png"},
-    {"assets/straight_road_left_right.png"},
-    {"assets/corner_left.png"},
-    {"assets/corner_right.png"},
-    {"assets/corner_left_down.png"},
-    {"assets/corner_right_down.png"},
-    {"assets/start_line_mark.png"},
-    {"assets/start_line_mark_down.png"},
-    {"assets/start_line_mark_left.png"},
-    {"assets/start_line_mark_right.png"},
-    {"assets/car_up.png"},
-    {"assets/car_down.png"},
-    {"assets/car_left.png"},
-    {"assets/car_right.png"},
-    {"assets/finish_line_mark.png"},
-    {"assets/finish_line_mark_down.png"},
-    {"assets/finish_line_mark_left.png"},
-    {"assets/finish_line_mark_right.png"},
+    {"assets/green_ground.png"}, //0
+    {"assets/straight_road_up_down.png"}, //1
+    {"assets/straight_road_left_right.png"}, //2
+    {"assets/corner_left.png"}, //3
+    {"assets/corner_right.png"}, //4
+    {"assets/corner_left_down.png"}, //5
+    {"assets/corner_right_down.png"}, //6
+    {"assets/start_line_mark.png"}, //7
+    {"assets/start_line_mark_down.png"}, //8
+    {"assets/start_line_mark_left.png"}, //9
+    {"assets/start_line_mark_right.png"}, //10
+    {"assets/car_up.png"}, //11
+    {"assets/car_down.png"}, //12
+    {"assets/car_left.png"}, //13
+    {"assets/car_right.png"}, //14
+    {"assets/finish_line_mark.png"}, //15
+    {"assets/finish_line_mark_down.png"}, //16
+    {"assets/finish_line_mark_left.png"}, //17
+    {"assets/finish_line_mark_right.png"}, //18
 };
 
 void initTextures() {
@@ -69,7 +68,7 @@ void initTextures() {
         if (textures[i].id == 0) {
             gameState = ERROR_STATE;
             errorType = INIT_ERROR;
-            strcpy(errorMessage, TextFormat("Texture Missing: %s" , textureLocation[i]));
+            strcpy(errorMessage, TextFormat("Texture Missing: %s", textureLocation[i]));
             break;
         }
 

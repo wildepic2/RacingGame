@@ -37,6 +37,18 @@ void mapStringParser() {
     finishMark = (Vector3){mapString[j + 5], mapString[j + 6], mapString[j + 7]};
 }
 
+void drawMarks(Vector2 *pos) {
+    //Draws marks
+    int texture = startMark.z + 7;
+    DrawTexture(textures[texture], ((startMark.x * gridWidth) - pos->x) + 20,
+                ((startMark.y * gridHeight) - pos->y) + 20,
+                WHITE);
+    texture = finishMark.z + 15;
+    DrawTexture(textures[texture], ((finishMark.x * gridWidth) - pos->x) + 20,
+                ((finishMark.y * gridHeight) - pos->y) + 20,
+                WHITE);
+}
+
 void drawMap(Vector2 *pos) {
     //Draws the Tiles on Right place
     //The tiles X Y starts from the Origin Declared above
@@ -47,8 +59,5 @@ void drawMap(Vector2 *pos) {
                         ((ii * gridHeight) - pos->y) + originY,WHITE);
         }
     }
-    int texture = startMark.z + 7;
-    DrawTexture(textures[texture], (startMark.x * gridWidth) - pos->x, (startMark.y * gridHeight) - pos->y, WHITE);
-    texture = finishMark.z + 15;
-    DrawTexture(textures[texture], (finishMark.x * gridWidth) - pos->x, (finishMark.y * gridHeight) - pos->y, WHITE);
+    drawMarks(pos);
 }

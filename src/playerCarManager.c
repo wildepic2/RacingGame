@@ -182,7 +182,7 @@ void playerCar(Vector2 *pos, Camera2D *camera) {
     float kmhCalculated = speed * 5.79f;
     //IF dev modus it allows to draw the map and export it as map string
     if (isDev) {
-        drawMapAsCar(pos);
+        drawMapAsCar(pos, directionText);
     }
     //Draws The KMH
     DrawText(TextFormat("%0.2f km/h", kmhCalculated), pos->x - 355, pos->y - 355, 40, BLACK);

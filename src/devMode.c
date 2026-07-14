@@ -4,6 +4,9 @@
 
 #include "devMode.h"
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 #include "raylib.h"
 #include "initTextures.h"
 #include "mapManager.h"
@@ -12,6 +15,7 @@
 
 int currentTexture = 0;
 int currentMode = 0;
+int currentMark = 0;
 
 void resetMap() {
     if (IsKeyPressed(KEY_R)) {
@@ -104,17 +108,102 @@ void layer1DevMode(Vector2 *pos) {
     drawTexture(pos);
 }
 
-void startStopMarkAddMode() {
-}
+void putMark(int i, int ii, char directionText[5]) {
+    Vector3 Mark = {};
+    //Checks if the road where the mark will be put if its Horizontal or Vertical
+    //This will be Put in the Z coord (Texture) of Mark
+    if (mapTextureLocation[i][ii] == 1) {
+        Mark = (Vector3){i, ii, 0};
+        //Because Normally The Up Version is displayed but when the car is pointed down it adds
+        //one to the Z what displays the Down Version or better said it inverts it
+        if (strcmp(directionText, "down") == 0) {
+            Mark.z++;
+        }
+    }
+    if (mapTextureLocation[i][ii] == 2) {
+        Mark = (Vector3){i, ii, 2};
+        //Because Normally The Left Version is displayed but when the car is pointed Right it adds
+        //one to the Z what displays the Right Version or better said it inverts it
+        if (strcmp(directionText, "right") == 0) {
+            Mark.z++;
+        }
+    }
 
-void modeSwitch(Vector2 *pos) {
-    if (currentMode == 0) {
-        layer1DevMode(pos);
-    } else if (currentMode == 1) {
-        startStopMarkAddMode();
+    //Checks again if we are on a road because Mark could else draw the marks where there are no roads
+    //Because the funtion is called on every grid square and Vector 3 Mark is 0 default whats good enough to draw it
+    if ((mapTextureLocation[i][ii] == 1 || mapTextureLocation[i][ii] == 2)) {
+        //Chooses If it draws Finish or Start Mark
+        //Also Checks if the Mark isnt the Position of the Old Mark and also the other mark
+        //If all correct it updates the pos and direction of the mark
+        if (currentMark == 0 && (Mark.x != startMark.x || Mark.y != startMark.y || Mark.z != startMark.z) && (
+                Mark.x != finishMark.x || Mark.y != finishMark.y)) {
+            startMark = Mark;
+        }
+        if (currentMark == 1 && (Mark.x != finishMark.x || Mark.y != finishMark.y || Mark.z != finishMark.z) && (
+                Mark.x != startMark.x || Mark.y != startMark.y)) {
+            finishMark = Mark;
+        }
     }
 }
 
+//Calculates on which grid to Put the mark
+void drawMark(Vector2 *pos, char directionText[5]) {
+    //Calculates the grid square of the car
+    for (int i = 0; i < 100; i++) {
+        for (int ii = 0; ii < 100; ii++) {
+            if (pos->x < (i * 384) + originX && pos->y < (ii * 384) + originY && pos->x > ((i * 384) - 384) + originX &&
+                pos->y > ((ii * 384) - 384) + originY) {
+                //If you press P it calls putMark
+                if (IsKeyDown(KEY_P)) {
+                    putMark(i, ii, directionText);
+                }
+            }
+        }
+    }
+}
+
+//Makes You choose with arrow up down keys which mark to put
+void chooseMark() {
+    if (IsKeyPressed(KEY_UP)) {
+        if (currentMark < 1) {
+            currentMark++;
+        }
+    }
+    if (IsKeyPressed(KEY_DOWN)) {
+        if (currentMark > 0) {
+            currentMark--;
+        }
+    }
+}
+
+//Shows which mark you have selected
+void displaySelectedMarkText(Vector2 *pos) {
+    DrawText(TextFormat("Current Mark: "), pos->x - 355, pos->y - 250, 40, BLACK);
+    if (currentMark == 0) {
+        DrawText(TextFormat("Start Mark"), pos->x - 50, pos->y - 250, 40,BLACK);
+    }
+    if (currentMark == 1) {
+        DrawText(TextFormat("Finish Mark"), pos->x - 50, pos->y - 250, 40,BLACK);
+    }
+}
+
+//Calls all functions that you can choose which mark to draw where in this mode
+void startStopMarkAddMode(Vector2 *pos, char directionText[5]) {
+    chooseMark();
+    displaySelectedMarkText(pos);
+    drawMark(pos, directionText);
+}
+
+//Selects which mode to call
+void modeSwitch(Vector2 *pos, char directionText[5]) {
+    if (currentMode == 0) {
+        layer1DevMode(pos);
+    } else if (currentMode == 1) {
+        startStopMarkAddMode(pos, directionText);
+    }
+}
+
+//allows you to change the mode
 void selectMode() {
     if (IsKeyPressed(KEY_LEFT)) {
         if (currentMode < 1) {
@@ -129,7 +218,7 @@ void selectMode() {
 }
 
 //It allows the car in dev modus to draw the map and export it
-void drawMapAsCar(Vector2 *pos) {
+void drawMapAsCar(Vector2 *pos, char directionText[5]) {
     //Resets full dev Map back to grass
     //And autosaves the just grass to the auto dev save
     resetMap();
@@ -141,5 +230,5 @@ void drawMapAsCar(Vector2 *pos) {
     drawDevModeText(pos);
 
     selectMode();
-    modeSwitch(pos);
+    modeSwitch(pos, directionText);
 }
