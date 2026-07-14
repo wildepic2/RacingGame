@@ -24,6 +24,8 @@ void resetMap() {
                 mapTextureLocation[i][ii] = 0;
             }
         }
+        originX = mapString[10000];
+        originY = mapString[10001];
         saveMap();
     }
 }
