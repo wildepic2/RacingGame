@@ -26,6 +26,9 @@ void resetMap() {
         }
         originX = 0;
         originY = 0;
+        Vector3 Mark = {};
+        startMark = Mark;
+        finishMark = Mark;
         saveMap();
     }
 }
