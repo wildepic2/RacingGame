@@ -40,12 +40,12 @@ void mapStringParser() {
 void drawMarks(Vector2 *pos) {
     //Draws marks
     int texture = startMark.z + 7;
-    DrawTexture(textures[texture], ((startMark.x * gridWidth) - pos->x) + 20,
-                ((startMark.y * gridHeight) - pos->y) + 20,
+    DrawTexture(textures[texture], ((startMark.x * gridWidth) - pos->x) + 20 + originX,
+                ((startMark.y * gridHeight) - pos->y) + 20 + originY,
                 WHITE);
     texture = finishMark.z + 15;
-    DrawTexture(textures[texture], ((finishMark.x * gridWidth) - pos->x) + 20,
-                ((finishMark.y * gridHeight) - pos->y) + 20,
+    DrawTexture(textures[texture], ((finishMark.x * gridWidth) - pos->x) + 20 + originX,
+                ((finishMark.y * gridHeight) - pos->y) + 20 + originY,
                 WHITE);
 }
 
