@@ -17,6 +17,7 @@ int currentTexture = 0;
 int currentMode = 0;
 int currentMark = 0;
 
+//Resets map in dev mode to the absolute basucs
 void resetMap() {
     if (IsKeyPressed(KEY_R)) {
         for (int i = 0; i < 100; i++) {
@@ -33,6 +34,7 @@ void resetMap() {
     }
 }
 
+//Exports the map as map string
 void exportMap() {
     if (IsKeyPressed(KEY_F1)) {
         printf("\n\n\n\n\n\n\n\n\n");
@@ -42,7 +44,7 @@ void exportMap() {
                 int num = mapTextureLocation[i][ii];
                 printf("%d", num);
                 if (ii == 99 && i == 99) {
-                    printf(", %d, %d", originX, originY);
+                    printf(", %d, %d, %f, %f, %f, %f, %f, %f", originX, originY, startMark.x , startMark.y , startMark.z , finishMark.x , finishMark.y , finishMark.z);
                     printf("\n");
                 } else {
                     printf(", ");
@@ -52,6 +54,7 @@ void exportMap() {
     }
 }
 
+//Select texture
 void selectTexture() {
     if (IsKeyPressed(KEY_UP)) {
         if (currentTexture < 6) {
@@ -65,6 +68,7 @@ void selectTexture() {
     }
 }
 
+//Allows to change the origin of the grids
 void enterOrigin() {
     if (IsKeyDown(KEY_O)) {
         printf("Enter new Origin X: ");
@@ -76,6 +80,7 @@ void enterOrigin() {
     }
 }
 
+//Text shown in dev mode
 void drawDevModeText(Vector2 *pos) {
     DrawText("DEV MODUS", pos->x - 200, pos->y + 290, 80, BLACK);
     DrawText(TextFormat("Current MODE: "), pos->x - 355, pos->y - 300, 40, BLACK);
@@ -90,6 +95,7 @@ void drawDevModeText(Vector2 *pos) {
     }
 }
 
+//Draws the selected tile on the grid where the car is located
 void drawTexture(Vector2 *pos) {
     for (int i = 0; i < 100; i++) {
         for (int ii = 0; ii < 100; ii++) {
