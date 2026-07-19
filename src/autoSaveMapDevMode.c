@@ -36,12 +36,29 @@ void readMap() {
     //Loads the origin from the save
     fptr = fopen("autosave_origin.txt", "r");
     if (fptr != NULL) {
-        char autoSavedOriginStringX[100] = {0};
-        char autoSavedOriginStringY[100] = {0};
-        fgets(autoSavedOriginStringX, 100, fptr);
-        fgets(autoSavedOriginStringY, 100, fptr);
-        originX = atoi(autoSavedOriginStringX);
-        originY = atoi(autoSavedOriginStringY);
+        char buffer[100] = {0};
+        fgets(buffer, 100, fptr);
+        originX = atoi(buffer);
+        fgets(buffer, 100, fptr);
+        originY = atoi(buffer);
+        fclose(fptr);
+    }
+
+    fptr = fopen("autosave_marks.txt", "r");
+    if (fptr != NULL) {
+        char buffer[100] = {0};
+        fgets(buffer, 100, fptr);
+        startMark.x = atof(buffer);
+        fgets(buffer, 100, fptr);
+        startMark.y = atof(buffer);
+        fgets(buffer, 100, fptr);
+        startMark.z = atof(buffer);
+        fgets(buffer, 100, fptr);
+        finishMark.x = atof(buffer);
+        fgets(buffer, 100, fptr);
+        finishMark.y = atof(buffer);
+        fgets(buffer, 100, fptr);
+        finishMark.z = atof(buffer);
         fclose(fptr);
     }
 }
@@ -67,5 +84,15 @@ void saveMap() {
     fptr = fopen("autosave_origin.txt", "w");
     fprintf(fptr, "%d\n", originX);
     fprintf(fptr, "%d\n", originY);
+    fclose(fptr);
+
+    //Autosaves the start and finish marks
+    fptr = fopen("autosave_marks.txt", "w");
+    fprintf(fptr, "%f\n", startMark.x);
+    fprintf(fptr, "%f\n", startMark.y);
+    fprintf(fptr, "%f\n", startMark.z);
+    fprintf(fptr, "%f\n", finishMark.x);
+    fprintf(fptr, "%f\n", finishMark.y);
+    fprintf(fptr, "%f\n", finishMark.z);
     fclose(fptr);
 }

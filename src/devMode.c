@@ -167,6 +167,7 @@ void drawMark(Vector2 *pos, char directionText[5]) {
                 //If you press P it calls putMark
                 if (IsKeyDown(KEY_P)) {
                     putMark(i, ii, directionText);
+                    saveMap();
                 }
             }
         }
