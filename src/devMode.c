@@ -27,7 +27,7 @@ void resetMap() {
         }
         originX = 0;
         originY = 0;
-        Vector3 Mark = {};
+        Vector3 Mark = {0 , 0 , -1};
         startMark = Mark;
         finishMark = Mark;
         saveMap();
