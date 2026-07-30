@@ -9,6 +9,7 @@
 #include "initTextures.h"
 #include "raylib.h"
 #include "mapString.h"
+#include "state.h"
 
 //Defines for every tile on the grid the size
 #define gridWidth 384
@@ -57,8 +58,10 @@ void drawMap(Vector2 *pos) {
     //Draws the grass around the map that you dont see anything white
     for (int i = -2; i < mapWidth + 2; i++) {
         for (int ii = -2; ii < mapHeight + 2; ii++) {
-            DrawTexture(textures[0], ((i * gridWidth) - pos->x) + originX,
+            if (isDev == false) {
+                DrawTexture(textures[0], ((i * gridWidth) - pos->x) + originX,
                         ((ii * gridHeight) - pos->y) + originY,WHITE);
+            }
         }
     }
     //Draws the Tiles on Right place
