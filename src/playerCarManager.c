@@ -15,6 +15,7 @@
 #include "state.h"
 #include "autoSaveMapDevMode.h"
 #include "devMode.h"
+#include "gameOverlayText.h"
 #include "mapString.h"
 
 float speed = 0.00f;
@@ -183,6 +184,10 @@ void playerCar(Vector2 *pos, Camera2D *camera) {
     //IF dev modus it allows to draw the map and export it as map string
     if (isDev) {
         drawMapAsCar(pos, directionText);
+    }
+    else {
+        //Shows Game Info like rounds and stoppwatch
+        overlayText(pos);
     }
     //Draws The KMH
     DrawText(TextFormat("%0.2f km/h", kmhCalculated), pos->x - 355, pos->y - 355, 40, BLACK);

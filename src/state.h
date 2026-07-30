@@ -12,4 +12,7 @@ typedef enum GameState {
 extern GameState gameState;
 extern bool isDev;
 
+extern int stoppWatchTime;
+extern int currentRound;
+
 #endif // RACINGGAME_STATE_H

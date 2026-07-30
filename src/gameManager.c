@@ -7,6 +7,7 @@
 #include <stdlib.h>
 
 #include "autoSaveMapDevMode.h"
+#include "gameOverlayText.h"
 #include "initTextures.h"
 #include "playerCarManager.h"
 #include "mapManager.h"
@@ -21,6 +22,7 @@ void whilePlaying(Vector2 *playerPos, Camera2D *camera) {
     //Draws The Map
     drawMap(playerPos);
     playerCar(playerPos, camera);
+    timer();
 }
 
 //Runs every frame when the gameState is Gameover
