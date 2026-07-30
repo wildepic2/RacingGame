@@ -35,7 +35,7 @@ void timer() {
         sec = 0;
         minute++;
     }
-    //Reconstructs the stoppwatchtime from minute second and milli second
+    //Reconstructs the stoppwatchtime from minute second and millisecond
     stoppWatchTime = (minute*10000) + (sec *100) +ms;
 
 }
