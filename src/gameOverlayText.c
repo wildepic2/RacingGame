@@ -60,4 +60,5 @@ void overlayText(Vector2 *pos) {
 
     //Shows Timer
     DrawText(TextFormat("%.2d:%.2d:%.2d", minute, sec, ms), pos->x - 80, pos->y - 300, 60, BLACK);
+    DrawText(TextFormat("Best: %.2d:%.2d:%.2d", 0, 0, 0), pos->x - 10, pos->y - 360, 60, RED);
 }

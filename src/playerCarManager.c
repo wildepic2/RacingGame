@@ -21,10 +21,13 @@
 float speed = 0.00f;
 //Top speed 300 kmh
 //Acceleration 3 second 0 to 100 kmh
+
 const float accelerationSpeedFrame = 0.0959f;
 const float deaccelerationSpeedFrame = 0.00508f;
 const float brakeSpeedFrame = 0.1059f;
 const float maxSpeed = 51.81f;
+
+const int maxGrassKMH = 10;
 
 //Saves which button of WASD where saved
 bool direction[4] = {false, false, false, false};
@@ -172,6 +175,41 @@ void updateCamera(Camera2D *camera, Vector2 *pos) {
     camera->offset = (Vector2){375, 375};
 }
 
+void stopCarLeavingMap(Vector2 *pos) {
+    if (pos->x + 386 < originX) {
+        speed = 0;
+        pos->x += 20;
+    }
+    if (pos->y + 386 < originY) {
+        speed = 0;
+        pos->y += 20;
+    }
+    if (pos->x + 500 > 38400 + originX) {
+        speed = 0;
+        pos->x -= 20;
+    }
+    if (pos->y + 500 > 38400 + originY) {
+        speed = 0;
+        pos->y -= 20;
+    }
+}
+
+//Make the car only driving the maxgrasspeed from the moment it drives on grass
+void grassPenalty(Vector2 *pos , float kmhCalculated) {
+    for (int i = 0; i < 100; i++) {
+        for (int ii = 0; ii < 100; ii++) {
+            if (pos->x < (i * 384) + originX && pos->y < (ii * 384) + originY && pos->x > ((i * 384) - 384) + originX &&
+                pos->y > ((ii * 384) - 384) + originY) {
+                if (mapTextureLocation[i][ii] == 0 && isDev == false) {
+                    if (kmhCalculated > maxGrassKMH) {
+                        speed = maxGrassKMH / 5.79f;;
+                    }
+                }
+                }
+        }
+    }
+}
+
 //All functions for Player Car
 void playerCar(Vector2 *pos, Camera2D *camera) {
     updateCamera(camera, pos);
@@ -184,8 +222,7 @@ void playerCar(Vector2 *pos, Camera2D *camera) {
     //IF dev modus it allows to draw the map and export it as map string
     if (isDev) {
         drawMapAsCar(pos, directionText);
-    }
-    else {
+    } else {
         //Shows Game Info like rounds and stoppwatch
         overlayText(pos);
     }
@@ -197,6 +234,11 @@ void playerCar(Vector2 *pos, Camera2D *camera) {
     playerInput(direction);
     carAcceleration(&speed);
     carDisacceleration(&speed);
+
+    stopCarLeavingMap(pos);
+
+    grassPenalty(pos, kmhCalculated);
+
     carMovement(pos, direction);
     carDirection(directionText, direction);
 }

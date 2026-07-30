@@ -54,6 +54,13 @@ void drawMarks(Vector2 *pos) {
 }
 
 void drawMap(Vector2 *pos) {
+    //Draws the grass around the map that you dont see anything white
+    for (int i = -2; i < mapWidth + 2; i++) {
+        for (int ii = -2; ii < mapHeight + 2; ii++) {
+            DrawTexture(textures[0], ((i * gridWidth) - pos->x) + originX,
+                        ((ii * gridHeight) - pos->y) + originY,WHITE);
+        }
+    }
     //Draws the Tiles on Right place
     //The tiles X Y starts from the Origin Declared above
     //Calculates Them where they should be that they move and look like the car moves but they move

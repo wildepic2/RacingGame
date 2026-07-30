@@ -17,7 +17,7 @@ int currentTexture = 0;
 int currentMode = 0;
 int currentMark = 0;
 
-//Resets map in dev mode to the absolute basucs
+//Resets map in dev mode to the absolute basics
 void resetMap() {
     if (IsKeyPressed(KEY_R)) {
         for (int i = 0; i < 100; i++) {
