@@ -26,7 +26,7 @@ void whilePlaying(Vector2 *playerPos, Camera2D *camera) {
     playerCar(playerPos, camera);
     timer();
 
-    if (finishMarkPass(playerPos)) {
+    if (finishMarkPass(playerPos) && isDev == false) {
         if (currentRound < 3) {
             currentRound++;
         }
