@@ -14,5 +14,6 @@ extern bool isDev;
 
 extern int stoppWatchTime;
 extern int currentRound;
+extern int highscore;
 
 #endif // RACINGGAME_STATE_H

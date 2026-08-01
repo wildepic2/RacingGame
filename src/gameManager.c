@@ -9,9 +9,10 @@
 #include "autoSaveMapDevMode.h"
 #include "finishMark.h"
 #include "gameOverlayText.h"
+#include "highscoreManager.h"
 #include "initTextures.h"
-#include "playerCarManager.h"
 #include "mapManager.h"
+#include "playerCarManager.h"
 #include "state.h"
 
 //Runs on every frame
@@ -29,6 +30,11 @@ void whilePlaying(Vector2 *playerPos, Camera2D *camera) {
         if (currentRound < 3) {
             currentRound++;
         }
+        else {
+            autosaveHighscore();
+            loadHighScore();
+            gameState = GAME_OVER;
+        }
     }
 }
 
@@ -42,4 +48,5 @@ void initGame() {
     //Inits the Game Textures
     initTextures();
     mapStringParser();
+    loadHighScore();
 }

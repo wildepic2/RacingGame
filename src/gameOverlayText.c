@@ -40,25 +40,32 @@ void timer() {
 
 }
 
+void reconstructTime(int *minute , int *sec , int *ms , int time ) {
+    //Get every digit from stoppwatch timer variable
+    int digit1 = 0, digit2 = 0, digit3 = 0, digit4 = 0, digit5 = 0, digit6 = 0;
+
+    digit1 = time / 100000;
+    digit2 = (time / 10000) % 10;
+    digit3 = (time / 1000) % 10;
+    digit4 = (time / 100) % 10;
+    digit5 = (time / 10) % 10;
+    digit6 = time % 10;
+
+    //Reconstructs the digits to minute second and milli second
+    *minute = digit1 * 10 + digit2;
+    *sec = digit3 * 10 + digit4;
+    *ms = digit5 * 10 + digit6;
+}
+
 //Shows Round and timer
 void overlayText(Vector2 *pos) {
     DrawText(TextFormat("%d/3 Rounds", currentRound), pos->x - 355, pos->y - 320, 40, BLACK);
 
-    //Get every digit from stoppwatch timer variable
-    int digit1 = 0, digit2 = 0, digit3 = 0, digit4 = 0, digit5 = 0, digit6 = 0;
-
-    digit1 = stoppWatchTime / 100000;
-    digit2 = (stoppWatchTime / 10000) % 10;
-    digit3 = (stoppWatchTime / 1000) % 10;
-    digit4 = (stoppWatchTime / 100) % 10;
-    digit5 = (stoppWatchTime / 10) % 10;
-    digit6 = stoppWatchTime % 10;
-    //Reconstructs the digits to minute second and milli second
-    int minute = digit1 * 10 + digit2;
-    int sec = digit3 * 10 + digit4;
-    int ms = digit5 * 10 + digit6;
+    int minute , sec , ms;
+    reconstructTime(&minute, &sec , &ms , stoppWatchTime);
 
     //Shows Timer
     DrawText(TextFormat("%.2d:%.2d:%.2d", minute, sec, ms), pos->x - 80, pos->y - 300, 60, BLACK);
-    DrawText(TextFormat("Best: %.2d:%.2d:%.2d", 0, 0, 0), pos->x - 10, pos->y - 360, 60, RED);
+    reconstructTime(&minute, &sec , &ms , highscore);
+    DrawText(TextFormat("Best: %.2d:%.2d:%.2d", minute, sec, ms), pos->x - 10, pos->y - 360, 60, RED);
 }
