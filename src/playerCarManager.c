@@ -10,13 +10,14 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "initTextures.h"
-#include "mapManager.h"
-#include "state.h"
 #include "autoSaveMapDevMode.h"
 #include "devMode.h"
+#include "finishMark.h"
 #include "gameOverlayText.h"
+#include "initTextures.h"
+#include "mapManager.h"
 #include "mapString.h"
+#include "state.h"
 
 float speed = 0.00f;
 //Top speed 300 kmh
@@ -241,4 +242,5 @@ void playerCar(Vector2 *pos, Camera2D *camera) {
 
     carMovement(pos, direction);
     carDirection(directionText, direction);
+    getCarDirection(directionText);
 }

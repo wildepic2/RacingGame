@@ -7,6 +7,7 @@
 #include <stdlib.h>
 
 #include "autoSaveMapDevMode.h"
+#include "finishMark.h"
 #include "gameOverlayText.h"
 #include "initTextures.h"
 #include "playerCarManager.h"
@@ -23,6 +24,12 @@ void whilePlaying(Vector2 *playerPos, Camera2D *camera) {
     drawMap(playerPos);
     playerCar(playerPos, camera);
     timer();
+
+    if (finishMarkPass(playerPos)) {
+        if (currentRound < 3) {
+            currentRound++;
+        }
+    }
 }
 
 //Runs every frame when the gameState is Gameover

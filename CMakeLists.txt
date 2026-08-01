@@ -140,7 +140,9 @@ add_executable(${PROJECT_NAME} ${MAIN_FILE}
         src/devMode.c
         src/errorManager.c
         src/gameOverlayText.c
-        src/gameOverlayText.h)
+        src/gameOverlayText.h
+        src/finishMark.c
+        src/finishMark.h)
 target_link_libraries(${PROJECT_NAME} PRIVATE raylib)
 
 # Compiler Warnings
