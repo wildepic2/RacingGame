@@ -15,7 +15,7 @@
 
 int currentTexture = 0;
 int currentMode = 0;
-int currentMark = 0;
+int currentMark = 0
 
 //Resets map in dev mode to the absolute basics
 void resetMap() {
