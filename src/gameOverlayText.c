@@ -67,5 +67,7 @@ void overlayText(Vector2 *pos) {
     //Shows Timer
     DrawText(TextFormat("%.2d:%.2d:%.2d", minute, sec, ms), pos->x - 80, pos->y - 300, 60, BLACK);
     reconstructTime(&minute, &sec , &ms , highscore);
-    DrawText(TextFormat("Best: %.2d:%.2d:%.2d", minute, sec, ms), pos->x - 10, pos->y - 360, 60, RED);
+    if (highscore < 14400000) {
+        DrawText(TextFormat("Best: %.2d:%.2d:%.2d", minute, sec, ms), pos->x - 10, pos->y - 360, 60, RED);
+    }
 }
