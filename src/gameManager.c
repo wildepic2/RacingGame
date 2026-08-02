@@ -4,9 +4,11 @@
 
 #include "gameManager.h"
 
+#include <stdio.h>
 #include <stdlib.h>
 
 #include "autoSaveMapDevMode.h"
+#include "checkpointsManager.h"
 #include "finishMark.h"
 #include "gameOverlayText.h"
 #include "highscoreManager.h"
@@ -25,14 +27,17 @@ void whilePlaying(Vector2 *playerPos, Camera2D *camera) {
     drawMap(playerPos);
     playerCar(playerPos, camera);
     timer();
+    checkpointPass(playerPos);
 
     if (finishMarkPass(playerPos) && isDev == false) {
-        if (currentRound < 3) {
+        if (currentRound < 3 && counter == 0) {
             currentRound++;
+            resetCounter();
         }
-        else {
+        else if (counter == 0) {
             autosaveHighscore();
             loadHighScore();
+            resetCounter();
             gameState = GAME_OVER;
         }
     }
@@ -40,7 +45,6 @@ void whilePlaying(Vector2 *playerPos, Camera2D *camera) {
 
 //Runs every frame when the gameState is Gameover
 void gameOver() {
-
 }
 
 //Runs on init game
@@ -49,4 +53,5 @@ void initGame() {
     initTextures();
     mapStringParser();
     loadHighScore();
+    calculateCheckpointsStraight();
 }
