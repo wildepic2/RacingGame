@@ -8,5 +8,6 @@
 
 bool finishMarkPass(Vector2 *pos);
 void getCarDirection(char directionText[5]);
+extern int lassPassTime;
 
 #endif //RACINGGAME_FINISHMARK_H

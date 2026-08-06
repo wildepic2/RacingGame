@@ -19,6 +19,7 @@
 
 //Runs on every frame
 void whilePlaying(Vector2 *playerPos, Camera2D *camera) {
+    loadHighScore();
     //Loads autosaved map in dev mode
     if (isDev) {
         readMap();
@@ -45,6 +46,8 @@ void whilePlaying(Vector2 *playerPos, Camera2D *camera) {
 
 //Runs every frame when the gameState is Gameover
 void gameOver() {
+    currentRound = 0;
+    lassPassTime = 0;
 }
 
 //Runs on init game
