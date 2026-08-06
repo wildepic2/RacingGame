@@ -46,7 +46,7 @@ void displayMainMenu() {
 
     // If you press any of controll keys the game starts
     if (IsKeyDown(KEY_A) || IsKeyDown(KEY_D) || IsKeyDown(KEY_S) || IsKeyDown(KEY_W) || IsKeyDown(KEY_SPACE)) {
-        gameState = PLAYING;
+        gameState = GAME_OVER;
     }
 }
 
@@ -57,16 +57,16 @@ void displayGameoverMenu() {
     reconstructTime(&minute, &sec, &ms, stoppWatchTime);
 
     // Shows Timer
-    DrawText(TextFormat("%.2d:%.2d:%.2d", minute, sec, ms), 300, 250, 60, BLACK);
+    DrawText(TextFormat("%.2d:%.2d:%.2d", minute, sec, ms), 282, 255, 60, BLACK);
     reconstructTime(&minute, &sec, &ms, highscore);
     if (highscore < 14400000) {
-        DrawText(TextFormat("Best: %.2d:%.2d:%.2d", minute, sec, ms), 200, 200, 60, RED);
+        DrawText(TextFormat("Best: %.2d:%.2d:%.2d", minute, sec, ms), 227, 200, 52, RED);
     }
 
-    DrawRectangle(210, 600, 382, 70, BLACK);
+    DrawRectangle(210, 600, 381, 70, BLACK);
     DrawText("Play Again", 240, 600, 60, WHITE);
 
-    if (GetMouseX() > 210 && GetMouseX() < 592 && GetMouseY() > 600 && GetMouseY() < 670 && IsMouseButtonReleased(0)) {
+    if (GetMouseX() > 210 && GetMouseX() < 591 && GetMouseY() > 600 && GetMouseY() < 670 && IsMouseButtonReleased(0)) {
         gameState = PLAYING;
         stoppWatchTime = 0;
     }
