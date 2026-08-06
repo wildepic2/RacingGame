@@ -37,6 +37,23 @@ bool direction[4] = {false, false, false, false};
 char directionText[5];
 int rotation = 0;
 
+void getStartMarkDirection(char directionText[]) {
+    if (countdown > 0) {
+        if (startMark.z == 0) {
+            strcpy(directionText, "up");
+        }
+        if (startMark.z == 1) {
+            strcpy(directionText, "down");
+        }
+        if (startMark.z == 2) {
+            strcpy(directionText, "left");
+        }
+        if (startMark.z == 3) {
+            strcpy(directionText, "right");
+        }
+    }
+}
+
 void resetCar(Vector2 *pos) {
     direction[0] = false;
     direction[1] = false;
@@ -226,6 +243,7 @@ void grassPenalty(Vector2 *pos , float kmhCalculated) {
 
 //All functions for Player Car
 void playerCar(Vector2 *pos, Camera2D *camera) {
+    getStartMarkDirection(directionText);
     updateCamera(camera, pos);
     //Starts the camera mode
     BeginMode2D(*camera);
