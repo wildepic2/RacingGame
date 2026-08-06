@@ -46,7 +46,7 @@ void displayMainMenu() {
 
     // If you press any of controll keys the game starts
     if (IsKeyDown(KEY_A) || IsKeyDown(KEY_D) || IsKeyDown(KEY_S) || IsKeyDown(KEY_W) || IsKeyDown(KEY_SPACE)) {
-        gameState = GAME_OVER;
+        gameState = PLAYING;
     }
 }
 
