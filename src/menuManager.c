@@ -63,10 +63,10 @@ void displayGameoverMenu() {
         DrawText(TextFormat("Best: %.2d:%.2d:%.2d", minute, sec, ms), 200, 200, 60, RED);
     }
 
-    DrawRectangle(210, 600, 400, 70, BLACK);
+    DrawRectangle(210, 600, 382, 70, BLACK);
     DrawText("Play Again", 240, 600, 60, WHITE);
 
-    if (GetMouseX() > 210 && GetMouseX() < 610 && GetMouseY() > 600 && GetMouseY() < 670 && IsMouseButtonReleased(0)) {
+    if (GetMouseX() > 210 && GetMouseX() < 592 && GetMouseY() > 600 && GetMouseY() < 670 && IsMouseButtonReleased(0)) {
         gameState = PLAYING;
         stoppWatchTime = 0;
     }
