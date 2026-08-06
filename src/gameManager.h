@@ -8,7 +8,7 @@
 
 void whilePlaying(Vector2 *playerPos, Camera2D *camera);
 
-void gameOver();
+void gameOver(Vector2 *playerPos);
 
 void initGame();
 

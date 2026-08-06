@@ -146,7 +146,9 @@ add_executable(${PROJECT_NAME} ${MAIN_FILE}
         src/highscoreManager.c
         src/highscoreManager.h
         src/checkpointsManager.c
-        src/checkpointsManager.h)
+        src/checkpointsManager.h
+        src/countdownGameStart.c
+        src/countdownGameStart.h)
 target_link_libraries(${PROJECT_NAME} PRIVATE raylib)
 
 # Compiler Warnings

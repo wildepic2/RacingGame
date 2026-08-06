@@ -33,7 +33,7 @@ int main(void) {
                 whilePlaying(&playerPosition, &camera);
                 break;
             case GAME_OVER:
-                gameOver();
+                gameOver(&playerPosition);
                 displayGameoverMenu();
                 break;
             case ERROR_STATE:

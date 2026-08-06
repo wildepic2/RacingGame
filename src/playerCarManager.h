@@ -8,5 +8,6 @@
 void playerCar(Vector2 *pos, Camera2D *camera);
 
 void updateCamera(Camera2D *camera, Vector2 *pos);
+void resetCar(Vector2 *pos);
 
 #endif //RACINGGAME_PLAYERCARMANAGER_H

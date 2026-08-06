@@ -4,6 +4,7 @@
 
 #include "gameOverlayText.h"
 
+#include "countdownGameStart.h"
 #include "raylib.h"
 #include "state.h"
 
@@ -70,4 +71,6 @@ void overlayText(Vector2 *pos) {
     if (highscore < 14400000) {
         DrawText(TextFormat("Best: %.2d:%.2d:%.2d", minute, sec, ms), pos->x - 10, pos->y - 360, 60, RED);
     }
+
+    showCountdown(pos);
 }

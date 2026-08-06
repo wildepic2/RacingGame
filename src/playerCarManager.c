@@ -11,6 +11,7 @@
 #include <string.h>
 
 #include "autoSaveMapDevMode.h"
+#include "countdownGameStart.h"
 #include "devMode.h"
 #include "finishMark.h"
 #include "gameOverlayText.h"
@@ -35,6 +36,18 @@ bool direction[4] = {false, false, false, false};
 //Saved the direction the car os showing
 char directionText[5];
 int rotation = 0;
+
+void resetCar(Vector2 *pos) {
+    direction[0] = false;
+    direction[1] = false;
+    direction[2] = false;
+    direction[3] = false;
+
+    rotation = 0;
+    speed = 0;
+    pos->x = 375;
+    pos->y = 375;
+}
 //Draws the player Car
 void drawPlayerCar(Vector2 pos, char text[]) {
     if (strcmp(text, "up") == 0) {
@@ -232,9 +245,12 @@ void playerCar(Vector2 *pos, Camera2D *camera) {
     //Stop the camera mode
     EndMode2D();
 
-    playerInput(direction);
-    carAcceleration(&speed);
-    carDisacceleration(&speed);
+    if (countdown == 0) {
+        playerInput(direction);
+        carAcceleration(&speed);
+        carDisacceleration(&speed);
+    }
+
 
     stopCarLeavingMap(pos);
 
