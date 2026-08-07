@@ -11,7 +11,7 @@ int frameCount = 0;
 
 void showCountdown(Vector2 *pos) {
     if (countdown > 0) {
-        DrawText(TextFormat("%d", countdown), pos->x - 0, pos->y - 200, 200, BLACK);
+        DrawText(TextFormat("%d", countdown), (int)pos->x - 0, (int)pos->y - 200, 200, BLACK);
     }
 }
 
