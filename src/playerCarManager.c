@@ -34,7 +34,7 @@ const int maxGrassKMH = 10;
 //Saves which button of WASD where saved
 bool direction[4] = {false, false, false, false};
 //Saved the direction the car os showing
-char directionText[5];
+char directionText[6];
 int rotation = 0;
 
 void getStartMarkDirection(char directionText[]) {
