@@ -1,6 +1,8 @@
 #ifndef RACINGGAME_STATE_H
 #define RACINGGAME_STATE_H
 
+#include <stdbool.h>
+
 //Definition GameState
 typedef enum GameState {
     PLAYING,
