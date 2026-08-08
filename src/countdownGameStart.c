@@ -12,7 +12,7 @@ int frameCount = 0;
 // Displays the countdown timer on screen at the player's position (5, 4, 3, 2, 1, GO)
 void showCountdown(Vector2 *pos) {
     if (countdown > 0) {
-        DrawText(TextFormat("%d", countdown), (int)pos->x - 0, (int)pos->y - 200, 200, BLACK);
+        DrawText(TextFormat("%d", countdown), (int) pos->x - 0, (int) pos->y - 200, 200, BLACK);
     }
 }
 
@@ -27,6 +27,4 @@ void countdownFun() {
 }
 
 // Resets the countdown timer to 5 seconds, used when starting a new game or lap
-void resetCountdown() {
-    countdown = 5;
-}
+void resetCountdown() { countdown = 5; }

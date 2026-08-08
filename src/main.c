@@ -1,33 +1,33 @@
 #include "errorManager.h"
 #include "gameManager.h"
+#include "menuManager.h"
 #include "raylib.h"
 #include "state.h"
-#include "menuManager.h"
 
 // Entry point for the Racing Game application
 // Initializes the window, camera, and game state
 // Main game loop that processes all game states and renders frames until window is closed
 int main(void) {
-    //Declares Camera
+    // Declares Camera
     Camera2D camera = {0};
-    //Declares Camera Infos
+    // Declares Camera Infos
     camera.rotation = 0.0f;
     camera.zoom = 1.0f;
-    //Inits Variables for Car Pos and Rotation
+    // Inits Variables for Car Pos and Rotation
     Vector2 playerPosition = {375, 375};
-    //Sets Window Size
+    // Sets Window Size
     const int screenWidth = 800;
     const int screenHeight = 800;
-    //Inits the window
+    // Inits the window
     InitWindow(screenWidth, screenHeight, "Racing Game");
     SetTargetFPS(60);
-    //Inits the game looking
+    // Inits the game looking
     initGame();
-    //Windows is open as long as you dont close it
+    // Windows is open as long as you dont close it
     while (!WindowShouldClose()) {
         BeginDrawing();
         ClearBackground(RAYWHITE);
-        //Switches between the game states
+        // Switches between the game states
         switch (gameState) {
             case MAIN_MENU:
                 displayMainMenu();
@@ -46,7 +46,7 @@ int main(void) {
 
         EndDrawing();
     }
-    //Fully closes the window
+    // Fully closes the window
     CloseWindow();
     return 0;
 }

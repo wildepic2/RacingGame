@@ -28,13 +28,13 @@ void errorTypeToString(char errorTypeText[]) {
 
 // Splits the error message into two halves for better display formatting on screen
 void errorTextParser(char errorMessageHalf1[], char errorMessageHalf2[]) {
-    int i =0;
-    //Copies 1 half
+    int i = 0;
+    // Copies 1 half
     for (int ii = 0; ii < 47; ii++) {
         errorMessageHalf1[ii] = errorMessage[i];
         i++;
     }
-    //Copies 2 Half
+    // Copies 2 Half
     for (int ii = 0; ii < 47; ii++) {
         errorMessageHalf2[ii] = errorMessage[i];
         i++;
@@ -50,7 +50,7 @@ void calculatePixelLength(char errorMessageHalf1[], char errorMessageHalf2[], in
 
 // Calculates the X coordinate to center a text string on the screen
 int calculateXCoordtoDraw(int pixelLength) {
-    int xCoord = (GetScreenWidth()- pixelLength) / 2;
+    int xCoord = (GetScreenWidth() - pixelLength) / 2;
     return xCoord;
 }
 
@@ -63,15 +63,15 @@ void errorMenu() {
     int pixelLength2 = 0;
 
     errorTypeToString(errorTypeText);
-    errorTextParser(errorMessageHalf1 , errorMessageHalf2);
+    errorTextParser(errorMessageHalf1, errorMessageHalf2);
     calculatePixelLength(errorMessageHalf1, errorMessageHalf2, &pixelLength1, &pixelLength2);
 
-    //Draws error type and error message
+    // Draws error type and error message
     DrawText(errorTypeText, 270, 150, 50, RED);
     DrawText(errorMessageHalf1, calculateXCoordtoDraw(pixelLength1), 230, 31, BLACK);
     DrawText(errorMessageHalf2, calculateXCoordtoDraw(pixelLength2), 270, 31, BLACK);
 
-    //Key Press SPACE to Exit
+    // Key Press SPACE to Exit
     DrawText("Press SPACE to Quit", 190, 450, 40, BLACK);
     if (IsKeyDown(KEY_SPACE)) {
         exit(0);

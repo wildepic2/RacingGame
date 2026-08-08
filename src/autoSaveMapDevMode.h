@@ -8,4 +8,4 @@
 void saveMap();
 void readMap();
 
-#endif //RACINGGAME_AUTOSAVEMAPDEVMODE_H
+#endif // RACINGGAME_AUTOSAVEMAPDEVMODE_H

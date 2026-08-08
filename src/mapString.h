@@ -5,11 +5,11 @@
 #ifndef RACINGGAME_MAPSTRING_H
 #define RACINGGAME_MAPSTRING_H
 
-//Origin for Tile Drawing
+// Origin for Tile Drawing
 extern int originX;
 extern int originY;
 
-//Stores the exported map string that the map can be shows what you made
+// Stores the exported map string that the map can be shows what you made
 extern const float mapString[];
 
-#endif //RACINGGAME_MAPSTRING_H
+#endif // RACINGGAME_MAPSTRING_H

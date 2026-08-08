@@ -8,4 +8,4 @@
 
 void drawMapAsCar(Vector2 *pos, char directionText[5]);
 
-#endif //RACINGGAME_DEVMODE_H
+#endif // RACINGGAME_DEVMODE_H

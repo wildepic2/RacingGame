@@ -11,9 +11,9 @@
 // Increments the stopwatch timer and handles time unit rollover (milliseconds → seconds → minutes)
 // Called once per frame to update the elapsed time display
 void timer() {
-    stoppWatchTime+=1;
+    stoppWatchTime += 1;
 
-    //get every digit of the variable stopWatchtime
+    // get every digit of the variable stopWatchtime
     int digit1 = 0, digit2 = 0, digit3 = 0, digit4 = 0, digit5 = 0, digit6 = 0;
     digit1 = stoppWatchTime / 100000;
     digit2 = (stoppWatchTime / 10000) % 10;
@@ -22,29 +22,28 @@ void timer() {
     digit5 = (stoppWatchTime / 10) % 10;
     digit6 = stoppWatchTime % 10;
 
-    //Reconstructs the digits into minute second and milli second
+    // Reconstructs the digits into minute second and milli second
     int minute = digit1 * 10 + digit2;
     int sec = digit3 * 10 + digit4;
     int ms = digit5 * 10 + digit6;
 
-    //If ms is over 60 it sets it to 0 and increment sec
+    // If ms is over 60 it sets it to 0 and increment sec
     if (ms > 60) {
         ms = 0;
         sec++;
     }
-    //If sec is over 60 it sets it to 0 and increment minute
+    // If sec is over 60 it sets it to 0 and increment minute
     if (sec > 60) {
         sec = 0;
         minute++;
     }
-    //Reconstructs the stoppwatchtime from minute second and millisecond
-    stoppWatchTime = (minute*10000) + (sec *100) +ms;
-
+    // Reconstructs the stoppwatchtime from minute second and millisecond
+    stoppWatchTime = (minute * 10000) + (sec * 100) + ms;
 }
 
 // Converts a time value into separate minutes, seconds, and milliseconds components
 // Extracts individual digits and reconstructs them as human-readable time units
-void reconstructTime(int *minute , int *sec , int *ms , int time ) {
+void reconstructTime(int *minute, int *sec, int *ms, int time) {
     int digit1 = 0, digit2 = 0, digit3 = 0, digit4 = 0, digit5 = 0, digit6 = 0;
 
     digit1 = time / 100000;
@@ -54,7 +53,7 @@ void reconstructTime(int *minute , int *sec , int *ms , int time ) {
     digit5 = (time / 10) % 10;
     digit6 = time % 10;
 
-    //Reconstructs the digits to minute second and milli second
+    // Reconstructs the digits to minute second and milli second
     *minute = digit1 * 10 + digit2;
     *sec = digit3 * 10 + digit4;
     *ms = digit5 * 10 + digit6;
@@ -62,15 +61,15 @@ void reconstructTime(int *minute , int *sec , int *ms , int time ) {
 
 // Displays on-screen game overlay: current round, elapsed time, best time, and countdown
 void overlayText(Vector2 *pos) {
-    //Shows Round and timer
+    // Shows Round and timer
     DrawText(TextFormat("%d/3 Rounds", currentRound), pos->x - 355, pos->y - 320, 40, BLACK);
 
-    int minute , sec , ms;
-    reconstructTime(&minute, &sec , &ms , stoppWatchTime);
+    int minute, sec, ms;
+    reconstructTime(&minute, &sec, &ms, stoppWatchTime);
 
-    //Shows Timer
+    // Shows Timer
     DrawText(TextFormat("%.2d:%.2d:%.2d", minute, sec, ms), pos->x - 80, pos->y - 300, 60, BLACK);
-    reconstructTime(&minute, &sec , &ms , highscore);
+    reconstructTime(&minute, &sec, &ms, highscore);
     if (highscore < 14400000) {
         DrawText(TextFormat("Best: %.2d:%.2d:%.2d", minute, sec, ms), pos->x - 10, pos->y - 360, 60, RED);
     }

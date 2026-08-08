@@ -3,13 +3,8 @@
 
 #include <stdbool.h>
 
-//Definition GameState
-typedef enum GameState {
-    PLAYING,
-    GAME_OVER,
-    MAIN_MENU,
-    ERROR_STATE
-} GameState;
+// Definition GameState
+typedef enum GameState { PLAYING, GAME_OVER, MAIN_MENU, ERROR_STATE } GameState;
 
 extern GameState gameState;
 extern bool isDev;

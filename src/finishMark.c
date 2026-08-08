@@ -21,14 +21,11 @@ int directionCar = 0;
 void getCarDirection(char directionTextGot[5]) {
     if (strcmp(directionTextGot, "up") == 0) {
         directionCar = 0;
-    }
-    else if (strcmp(directionTextGot, "down") == 0) {
+    } else if (strcmp(directionTextGot, "down") == 0) {
         directionCar = 1;
-    }
-    else if (strcmp(directionTextGot, "left") == 0) {
+    } else if (strcmp(directionTextGot, "left") == 0) {
         directionCar = 2;
-    }
-    else if (strcmp(directionTextGot, "right") == 0) {
+    } else if (strcmp(directionTextGot, "right") == 0) {
         directionCar = 3;
     }
 }
@@ -41,7 +38,8 @@ bool finishMarkPass(Vector2 *pos) {
         for (int ii = 0; ii < 100; ii++) {
             if (pos->x < (i * 384) + originX && pos->y < (ii * 384) + originY && pos->x > ((i * 384) - 384) + originX &&
                 pos->y > ((ii * 384) - 384) + originY) {
-                if (finishMark.x == i && finishMark.y == ii && lassPassTime + 100 < stoppWatchTime && finishMark.z == directionCar) {
+                if (finishMark.x == i && finishMark.y == ii && lassPassTime + 100 < stoppWatchTime &&
+                    finishMark.z == directionCar) {
                     lassPassTime = stoppWatchTime;
                     return true;
                 }

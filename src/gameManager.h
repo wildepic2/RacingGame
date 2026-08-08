@@ -12,4 +12,4 @@ void gameOver(Vector2 *playerPos);
 
 void initGame();
 
-#endif //RACINGGAME_GAMEMANAGER_H
+#endif // RACINGGAME_GAMEMANAGER_H

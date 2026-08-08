@@ -4,8 +4,8 @@
 
 #include <stdio.h>
 
-#include "raylib.h"
 #include "playerCarManager.h"
+#include "raylib.h"
 
 #include <stdlib.h>
 #include <string.h>
@@ -21,8 +21,8 @@
 #include "state.h"
 
 float speed = 0.00f;
-//Top speed 300 kmh
-//Acceleration 3 second 0 to 100 kmh
+// Top speed 300 kmh
+// Acceleration 3 second 0 to 100 kmh
 
 const float accelerationSpeedFrame = 0.0959f;
 const float deaccelerationSpeedFrame = 0.00508f;
@@ -31,9 +31,9 @@ const float maxSpeed = 51.81f;
 
 const int maxGrassKMH = 10;
 
-//Saves which button of WASD where saved
+// Saves which button of WASD where saved
 bool direction[4] = {false, false, false, false};
-//Saved the direction the car os showing
+// Saved the direction the car os showing
 char directionText[6];
 int rotation = 0;
 
@@ -76,9 +76,9 @@ void drawPlayerCar(Vector2 pos, char text[]) {
     } else if (strcmp(text, "down") == 0) {
         DrawTextureEx(textures[12], pos, rotation, 1.0f, WHITE);
     } else if (strcmp(text, "right") == 0) {
-        DrawTextureEx(textures[14], pos, rotation, 1.0f,WHITE);
+        DrawTextureEx(textures[14], pos, rotation, 1.0f, WHITE);
     } else if (strcmp(text, "left") == 0) {
-        DrawTextureEx(textures[13], pos, rotation, 1.0f,WHITE);
+        DrawTextureEx(textures[13], pos, rotation, 1.0f, WHITE);
     }
 }
 
@@ -105,7 +105,7 @@ void carBrake(float *speed) {
 // Processes player keyboard input and updates the direction array (W/A/S/D for movement, SPACE for brake)
 // direction[0]=left, direction[1]=right, direction[2]=up, direction[3]=down
 void playerInput(bool direction[4]) {
-    //If you pressed one key it resets it which direction did the car move
+    // If you pressed one key it resets it which direction did the car move
     if (IsKeyDown(KEY_A) || IsKeyDown(KEY_D) || IsKeyDown(KEY_W) || IsKeyDown(KEY_S)) {
         direction[0] = false;
         direction[1] = false;
@@ -113,7 +113,7 @@ void playerInput(bool direction[4]) {
         direction[3] = false;
     }
 
-    //Sets in which direction the car moves
+    // Sets in which direction the car moves
     if (IsKeyDown(KEY_W)) {
         direction[3] = false;
         direction[2] = true;
@@ -128,7 +128,7 @@ void playerInput(bool direction[4]) {
         direction[0] = false;
         direction[1] = true;
     }
-    //Space brake
+    // Space brake
     if (IsKeyDown(KEY_SPACE)) {
         carBrake(&speed);
     }
@@ -137,20 +137,20 @@ void playerInput(bool direction[4]) {
 // Updates the car's position based on current speed and direction flags
 // Applies movement in pixels per frame according to the speed variable
 void carMovement(Vector2 *pos, bool direction[4]) {
-    //Make the car with the speed move into the direction
-    //Left
+    // Make the car with the speed move into the direction
+    // Left
     if (direction[0]) {
         pos->x -= speed;
     }
-    //Right
+    // Right
     if (direction[1]) {
         pos->x += speed;
     }
-    //Up
+    // Up
     if (direction[2]) {
         pos->y -= speed;
     }
-    //Down
+    // Down
     if (direction[3]) {
         pos->y += speed;
     }
@@ -173,39 +173,39 @@ void carDisacceleration(float *speed) {
 void carDirection(char directionText[], bool direction[4]) {
     rotation = 0;
     strcpy(directionText, "up");
-    //Left Up diagonal
+    // Left Up diagonal
     if (direction[0] && direction[2]) {
         strcpy(directionText, "left");
         rotation = 45;
     }
-    //Right Up diagonal
+    // Right Up diagonal
     else if (direction[1] && direction[2]) {
         strcpy(directionText, "up");
         rotation = 45;
     }
-    //Left Down diagonal
+    // Left Down diagonal
     else if (direction[0] && direction[3]) {
         strcpy(directionText, "down");
         rotation = 45;
     }
-    //Right Down diagonal
+    // Right Down diagonal
     else if (direction[1] && direction[3]) {
         strcpy(directionText, "right");
         rotation = 45;
     }
-    //Left
+    // Left
     else if (direction[0]) {
         strcpy(directionText, "left");
     }
-    //Right
+    // Right
     else if (direction[1]) {
         strcpy(directionText, "right");
     }
-    //Up
+    // Up
     else if (direction[2]) {
         strcpy(directionText, "up");
     }
-    //Down
+    // Down
     else if (direction[3]) {
         strcpy(directionText, "down");
     }
@@ -214,8 +214,8 @@ void carDirection(char directionText[], bool direction[4]) {
 // Updates the camera position to follow the player's car, keeping it centered on screen
 // The camera offset positions the car in the middle of the 800x800 window
 void updateCamera(Camera2D *camera, Vector2 *pos) {
-    camera->target = (Vector2){pos->x, pos->y};
-    camera->offset = (Vector2){375, 375};
+    camera->target = (Vector2) {pos->x, pos->y};
+    camera->offset = (Vector2) {375, 375};
 }
 
 // Prevents the car from leaving the map boundaries by stopping it and pushing it back inside
@@ -241,17 +241,18 @@ void stopCarLeavingMap(Vector2 *pos) {
 
 // Applies a speed penalty when the car drives on grass (tile type 0)
 // Limits car speed to maxGrassKMH to simulate friction on grass terrain
-void grassPenalty(Vector2 *pos , float kmhCalculated) {
+void grassPenalty(Vector2 *pos, float kmhCalculated) {
     for (int i = 0; i < 100; i++) {
         for (int ii = 0; ii < 100; ii++) {
             if (pos->x < (i * 384) + originX && pos->y < (ii * 384) + originY && pos->x > ((i * 384) - 384) + originX &&
                 pos->y > ((ii * 384) - 384) + originY) {
                 if (mapTextureLocation[i][ii] == 0 && isDev == false) {
                     if (kmhCalculated > maxGrassKMH) {
-                        speed = maxGrassKMH / 5.79f;;
+                        speed = maxGrassKMH / 5.79f;
+                        ;
                     }
                 }
-                }
+            }
         }
     }
 }
@@ -261,22 +262,22 @@ void grassPenalty(Vector2 *pos , float kmhCalculated) {
 void playerCar(Vector2 *pos, Camera2D *camera) {
     getStartMarkDirection(directionText);
     updateCamera(camera, pos);
-    //Starts the camera mode
+    // Starts the camera mode
     BeginMode2D(*camera);
-    //Draws the car
+    // Draws the car
     drawPlayerCar(*pos, directionText);
-    //Calculates the kmh
+    // Calculates the kmh
     float kmhCalculated = speed * 5.79f;
-    //IF dev modus it allows to draw the map and export it as map string
+    // IF dev modus it allows to draw the map and export it as map string
     if (isDev) {
         drawMapAsCar(pos, directionText);
     } else {
-        //Shows Game Info like rounds and stoppwatch
+        // Shows Game Info like rounds and stoppwatch
         overlayText(pos);
     }
-    //Draws The KMH
+    // Draws The KMH
     DrawText(TextFormat("%0.2f km/h", kmhCalculated), pos->x - 355, pos->y - 355, 40, BLACK);
-    //Stop the camera mode
+    // Stop the camera mode
     EndMode2D();
 
     if (countdown == 0) {

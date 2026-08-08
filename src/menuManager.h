@@ -9,4 +9,4 @@ void displayMainMenu();
 
 void displayGameoverMenu();
 
-#endif //RACINGGAME_MAINMENU_H
+#endif // RACINGGAME_MAINMENU_H

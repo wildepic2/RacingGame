@@ -8,6 +8,6 @@
 
 void overlayText(Vector2 *pos);
 void timer();
-void reconstructTime(int *minute , int *sec , int *ms , int time );
+void reconstructTime(int *minute, int *sec, int *ms, int time);
 
-#endif //RACINGGAME_GAMEOVERLAYTEXT_H
+#endif // RACINGGAME_GAMEOVERLAYTEXT_H

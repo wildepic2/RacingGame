@@ -23,7 +23,7 @@ void readMap() {
         fgets(autoSavedMapString, 10001, fptr);
 
         int j = 0;
-        //Parses the content of autosave
+        // Parses the content of autosave
         for (int i = 0; i < 100; i++) {
             for (int ii = 0; ii < 100; ii++) {
                 int num = autoSavedMapString[j] - '0';
@@ -33,7 +33,7 @@ void readMap() {
         }
         fclose(fptr);
     }
-    //Loads the origin from the save
+    // Loads the origin from the save
     fptr = fopen("autosave_origin.txt", "r");
     if (fptr != NULL) {
         char buffer[100] = {0};
@@ -71,8 +71,8 @@ void saveMap() {
     // Open a file in writing mode
     fptr = fopen("autosave_level_1.txt", "w");
 
-    //Parses the matrix to be a long chain of ints
-    //Writes the parsed into the autosave.txt
+    // Parses the matrix to be a long chain of ints
+    // Writes the parsed into the autosave.txt
     for (int i = 0; i < 100; i++) {
         for (int ii = 0; ii < 100; ii++) {
             int num = mapTextureLocation[i][ii];
@@ -82,13 +82,13 @@ void saveMap() {
 
     // Close the file
     fclose(fptr);
-    //Save the origin to the origin auto save file
+    // Save the origin to the origin auto save file
     fptr = fopen("autosave_origin.txt", "w");
     fprintf(fptr, "%d\n", originX);
     fprintf(fptr, "%d\n", originY);
     fclose(fptr);
 
-    //Autosaves the start and finish marks
+    // Autosaves the start and finish marks
     fptr = fopen("autosave_marks.txt", "w");
     fprintf(fptr, "%f\n", startMark.x);
     fprintf(fptr, "%f\n", startMark.y);

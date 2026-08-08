@@ -7,11 +7,11 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "raylib.h"
+#include "autoSaveMapDevMode.h"
 #include "initTextures.h"
 #include "mapManager.h"
-#include "autoSaveMapDevMode.h"
 #include "mapString.h"
+#include "raylib.h"
 
 int currentTexture = 0;
 int currentMode = 0;
@@ -28,7 +28,7 @@ void resetMap() {
         }
         originX = 0;
         originY = 0;
-        Vector3 Mark = {0 , 0 , -1};
+        Vector3 Mark = {0, 0, -1};
         startMark = Mark;
         finishMark = Mark;
         saveMap();
@@ -46,7 +46,8 @@ void exportMap() {
                 int num = mapTextureLocation[i][ii];
                 printf("%d", num);
                 if (ii == 99 && i == 99) {
-                    printf(", %d, %d, %f, %f, %f, %f, %f, %f", originX, originY, startMark.x , startMark.y , startMark.z , finishMark.x , finishMark.y , finishMark.z);
+                    printf(", %d, %d, %f, %f, %f, %f, %f, %f", originX, originY, startMark.x, startMark.y, startMark.z,
+                           finishMark.x, finishMark.y, finishMark.z);
                     printf("\n");
                 } else {
                     printf(", ");
@@ -114,11 +115,11 @@ void drawTexture(Vector2 *pos) {
 
 // Dev mode layer 1 - allows placing and selecting road/terrain tiles using arrow keys and P key
 void layer1DevMode(Vector2 *pos) {
-    //select texture arrow keys
+    // select texture arrow keys
     selectTexture();
     DrawText(TextFormat("Current Texture ID: %d", currentTexture), pos->x - 355, pos->y - 250, 40, BLACK);
-    DrawText(textureLocation[currentTexture], pos->x - 355, pos->y - 200, 40,BLACK);
-    //Calculates on which grid square you are and if you press P you draw the selected texture there
+    DrawText(textureLocation[currentTexture], pos->x - 355, pos->y - 200, 40, BLACK);
+    // Calculates on which grid square you are and if you press P you draw the selected texture there
     drawTexture(pos);
 }
 
@@ -126,37 +127,37 @@ void layer1DevMode(Vector2 *pos) {
 // Automatically detects road orientation (horizontal/vertical) and sets appropriate direction
 void putMark(int i, int ii, char directionText[5]) {
     Vector3 Mark = {};
-    //Checks if the road where the mark will be put if its Horizontal or Vertical
-    //This will be Put in the Z coord (Texture) of Mark
+    // Checks if the road where the mark will be put if its Horizontal or Vertical
+    // This will be Put in the Z coord (Texture) of Mark
     if (mapTextureLocation[i][ii] == 1) {
-        Mark = (Vector3){i, ii, 0};
-        //Because Normally The Up Version is displayed but when the car is pointed down it adds
-        //one to the Z what displays the Down Version or better said it inverts it
+        Mark = (Vector3) {i, ii, 0};
+        // Because Normally The Up Version is displayed but when the car is pointed down it adds
+        // one to the Z what displays the Down Version or better said it inverts it
         if (strcmp(directionText, "down") == 0) {
             Mark.z++;
         }
     }
     if (mapTextureLocation[i][ii] == 2) {
-        Mark = (Vector3){i, ii, 2};
-        //Because Normally The Left Version is displayed but when the car is pointed Right it adds
-        //one to the Z what displays the Right Version or better said it inverts it
+        Mark = (Vector3) {i, ii, 2};
+        // Because Normally The Left Version is displayed but when the car is pointed Right it adds
+        // one to the Z what displays the Right Version or better said it inverts it
         if (strcmp(directionText, "right") == 0) {
             Mark.z++;
         }
     }
 
-    //Checks again if we are on a road because Mark could else draw the marks where there are no roads
-    //Because the funtion is called on every grid square and Vector 3 Mark is 0 default whats good enough to draw it
+    // Checks again if we are on a road because Mark could else draw the marks where there are no roads
+    // Because the funtion is called on every grid square and Vector 3 Mark is 0 default whats good enough to draw it
     if ((mapTextureLocation[i][ii] == 1 || mapTextureLocation[i][ii] == 2)) {
-        //Chooses If it draws Finish or Start Mark
-        //Also Checks if the Mark isnt the Position of the Old Mark and also the other mark
-        //If all correct it updates the pos and direction of the mark
-        if (currentMark == 0 && (Mark.x != startMark.x || Mark.y != startMark.y || Mark.z != startMark.z) && (
-                Mark.x != finishMark.x || Mark.y != finishMark.y)) {
+        // Chooses If it draws Finish or Start Mark
+        // Also Checks if the Mark isnt the Position of the Old Mark and also the other mark
+        // If all correct it updates the pos and direction of the mark
+        if (currentMark == 0 && (Mark.x != startMark.x || Mark.y != startMark.y || Mark.z != startMark.z) &&
+            (Mark.x != finishMark.x || Mark.y != finishMark.y)) {
             startMark = Mark;
         }
-        if (currentMark == 1 && (Mark.x != finishMark.x || Mark.y != finishMark.y || Mark.z != finishMark.z) && (
-                Mark.x != startMark.x || Mark.y != startMark.y)) {
+        if (currentMark == 1 && (Mark.x != finishMark.x || Mark.y != finishMark.y || Mark.z != finishMark.z) &&
+            (Mark.x != startMark.x || Mark.y != startMark.y)) {
             finishMark = Mark;
         }
     }
@@ -164,12 +165,12 @@ void putMark(int i, int ii, char directionText[5]) {
 
 // Detects the car's current grid position and places a mark there when P is pressed
 void drawMark(Vector2 *pos, char directionText[5]) {
-    //Calculates the grid square of the car
+    // Calculates the grid square of the car
     for (int i = 0; i < 100; i++) {
         for (int ii = 0; ii < 100; ii++) {
             if (pos->x < (i * 384) + originX && pos->y < (ii * 384) + originY && pos->x > ((i * 384) - 384) + originX &&
                 pos->y > ((ii * 384) - 384) + originY) {
-                //If you press P it calls putMark
+                // If you press P it calls putMark
                 if (IsKeyDown(KEY_P)) {
                     putMark(i, ii, directionText);
                     saveMap();
@@ -197,10 +198,10 @@ void chooseMark() {
 void displaySelectedMarkText(Vector2 *pos) {
     DrawText(TextFormat("Current Mark: "), pos->x - 355, pos->y - 250, 40, BLACK);
     if (currentMark == 0) {
-        DrawText(TextFormat("Start Mark"), pos->x - 50, pos->y - 250, 40,BLACK);
+        DrawText(TextFormat("Start Mark"), pos->x - 50, pos->y - 250, 40, BLACK);
     }
     if (currentMark == 1) {
-        DrawText(TextFormat("Finish Mark"), pos->x - 50, pos->y - 250, 40,BLACK);
+        DrawText(TextFormat("Finish Mark"), pos->x - 50, pos->y - 250, 40, BLACK);
     }
 }
 
@@ -237,14 +238,14 @@ void selectMode() {
 // Main dev mode function - enables map editing with tile placement, mark placement, and map export
 // Provides UI for selecting textures, placing marks, and saving map changes
 void drawMapAsCar(Vector2 *pos, char directionText[5]) {
-    //Resets full dev Map back to grass
-    //And autosaves the just grass to the auto dev save
+    // Resets full dev Map back to grass
+    // And autosaves the just grass to the auto dev save
     resetMap();
-    //Exports the map string into the cli
+    // Exports the map string into the cli
     exportMap();
-    //If key O is down you can set in console the origin coords
+    // If key O is down you can set in console the origin coords
     enterOrigin();
-    //Draw selected texture and shows you are in dev modus
+    // Draw selected texture and shows you are in dev modus
     drawDevModeText(pos);
 
     selectMode();

@@ -23,11 +23,11 @@
 void whilePlaying(Vector2 *playerPos, Camera2D *camera) {
     loadHighScore();
     countdownFun();
-    //Loads autosaved map in dev mode
+    // Loads autosaved map in dev mode
     if (isDev) {
         readMap();
     }
-    //Draws The Map
+    // Draws The Map
     drawMap(playerPos);
     playerCar(playerPos, camera);
     if (countdown == 0) {
@@ -38,8 +38,7 @@ void whilePlaying(Vector2 *playerPos, Camera2D *camera) {
             if (currentRound < 3 && counter == 0) {
                 currentRound++;
                 resetCounter();
-            }
-            else if (counter == 0) {
+            } else if (counter == 0) {
                 autosaveHighscore();
                 loadHighScore();
                 resetCounter();
@@ -61,7 +60,7 @@ void gameOver(Vector2 *playerPos) {
 // Initializes the game on startup - loads textures, parses map data, and loads highscore
 // Sets up all game resources and state required before gameplay begins
 void initGame() {
-    //Inits the Game Textures
+    // Inits the Game Textures
     initTextures();
     mapStringParser();
     loadHighScore();

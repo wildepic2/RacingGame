@@ -6,8 +6,8 @@
 #define RACINGGAME_MAPMANAGER_H
 #include "raylib.h"
 
-//Defines the tiles grid sizr
-#define mapWidth  100
+// Defines the tiles grid sizr
+#define mapWidth 100
 #define mapHeight 100
 
 extern Vector3 startMark;
@@ -17,4 +17,4 @@ void drawMap(Vector2 *pos);
 void mapStringParser();
 extern int mapTextureLocation[mapWidth][mapHeight];
 
-#endif //RACINGGAME_MAPMANAGER_H
+#endif // RACINGGAME_MAPMANAGER_H

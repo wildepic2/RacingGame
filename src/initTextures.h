@@ -5,12 +5,12 @@
 #define RACINGGAME_INITTEXTURES_H
 #include "raylib.h"
 
-//Defines how many textures they are
+// Defines how many textures they are
 #define textureCount 19
-//Texture2D array where all textures are saved
+// Texture2D array where all textures are saved
 extern Texture2D textures[textureCount];
 extern const char textureLocation[textureCount][100];
 
 void initTextures();
 
-#endif //RACINGGAME_INITTEXTURES_H
+#endif // RACINGGAME_INITTEXTURES_H

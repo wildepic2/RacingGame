@@ -3,7 +3,7 @@
 //
 
 #include "state.h"
-//Declaration gameState
+// Declaration gameState
 GameState gameState = MAIN_MENU;
 bool isDev = false;
 

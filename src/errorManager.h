@@ -5,7 +5,7 @@
 #ifndef RACINGGAME_ERRORMANAGER_H
 #define RACINGGAME_ERRORMANAGER_H
 
-//Definition ErrorType
+// Definition ErrorType
 typedef enum ErrorType {
     UNDEFINED,
     INIT_ERROR,
@@ -15,4 +15,4 @@ extern char errorMessage[94];
 
 void errorMenu();
 
-#endif //RACINGGAME_ERRORMANAGER_H
+#endif // RACINGGAME_ERRORMANAGER_H
