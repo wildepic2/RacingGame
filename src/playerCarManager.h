@@ -4,6 +4,7 @@
 
 #ifndef RACINGGAME_PLAYERCARMANAGER_H
 #define RACINGGAME_PLAYERCARMANAGER_H
+#include "raylib.h"
 
 void playerCar(Vector2 *pos, Camera2D *camera);
 
