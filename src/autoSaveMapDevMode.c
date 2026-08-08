@@ -8,8 +8,8 @@
 #include "mapManager.h"
 #include "mapString.h"
 
-//if(fptr != NULL) is for not having an error if the file doesnt yet exist
-//Reads the Map autosave
+// Loads the dev mode map autosave from file storage into the game
+// Restores map tiles, origin coordinates, and start/finish mark positions
 void readMap() {
     FILE *fptr;
 
@@ -63,6 +63,8 @@ void readMap() {
     }
 }
 
+// Saves the current map configuration to file storage for dev mode persistence
+// Writes map tiles, origin coordinates, and start/finish mark positions to separate files
 void saveMap() {
     FILE *fptr;
 

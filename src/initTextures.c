@@ -36,6 +36,8 @@ const char textureLocation[textureCount][100] = {
     {"assets/finish_line_mark_right.png"}, //18
 };
 
+// Initializes all game textures by loading them from asset files and resizing to appropriate dimensions
+// If any texture fails to load, triggers an error state with details of which texture is missing
 void initTextures() {
     Vector2 size[textureCount] = {
         {384, 384},

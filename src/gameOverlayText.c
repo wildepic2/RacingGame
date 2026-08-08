@@ -8,8 +8,9 @@
 #include "raylib.h"
 #include "state.h"
 
+// Increments the stopwatch timer and handles time unit rollover (milliseconds → seconds → minutes)
+// Called once per frame to update the elapsed time display
 void timer() {
-    //Increments Stoppwatch
     stoppWatchTime+=1;
 
     //get every digit of the variable stopWatchtime
@@ -41,8 +42,9 @@ void timer() {
 
 }
 
+// Converts a time value into separate minutes, seconds, and milliseconds components
+// Extracts individual digits and reconstructs them as human-readable time units
 void reconstructTime(int *minute , int *sec , int *ms , int time ) {
-    //Get every digit from stoppwatch timer variable
     int digit1 = 0, digit2 = 0, digit3 = 0, digit4 = 0, digit5 = 0, digit6 = 0;
 
     digit1 = time / 100000;
@@ -58,8 +60,9 @@ void reconstructTime(int *minute , int *sec , int *ms , int time ) {
     *ms = digit5 * 10 + digit6;
 }
 
-//Shows Round and timer
+// Displays on-screen game overlay: current round, elapsed time, best time, and countdown
 void overlayText(Vector2 *pos) {
+    //Shows Round and timer
     DrawText(TextFormat("%d/3 Rounds", currentRound), pos->x - 355, pos->y - 320, 40, BLACK);
 
     int minute , sec , ms;

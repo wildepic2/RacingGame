@@ -14,7 +14,7 @@ ErrorType errorType = UNDEFINED;
 char errorMessage[94];
 
 
-//Makes the error type of enum to char
+// Converts the ErrorType enum value to its string representation for display
 void errorTypeToString(char errorTypeText[]) {
     switch (errorType) {
         case UNDEFINED:
@@ -26,6 +26,7 @@ void errorTypeToString(char errorTypeText[]) {
     }
 }
 
+// Splits the error message into two halves for better display formatting on screen
 void errorTextParser(char errorMessageHalf1[], char errorMessageHalf2[]) {
     int i =0;
     //Copies 1 half
@@ -40,18 +41,20 @@ void errorTextParser(char errorMessageHalf1[], char errorMessageHalf2[]) {
     }
 }
 
-//Calculates how many pixels one string needs
+// Calculates how many pixels are needed to render error message strings
+// Each character is approximately 17 pixels wide at the default font size
 void calculatePixelLength(char errorMessageHalf1[], char errorMessageHalf2[], int *pixelLength1, int *pixelLength2) {
     *pixelLength1 = strlen(errorMessageHalf1) * 17;
     *pixelLength2 = strlen(errorMessageHalf2) * 17;
 }
 
-//Calculates which x coord should the char start for it to be center
+// Calculates the X coordinate to center a text string on the screen
 int calculateXCoordtoDraw(int pixelLength) {
     int xCoord = (GetScreenWidth()- pixelLength) / 2;
     return xCoord;
 }
 
+// Displays the error menu with error type and message, and allows user to exit via SPACE key
 void errorMenu() {
     char errorMessageHalf1[51] = {0};
     char errorMessageHalf2[51] = {0};

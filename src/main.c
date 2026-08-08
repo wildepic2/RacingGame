@@ -4,6 +4,9 @@
 #include "state.h"
 #include "menuManager.h"
 
+// Entry point for the Racing Game application
+// Initializes the window, camera, and game state
+// Main game loop that processes all game states and renders frames until window is closed
 int main(void) {
     //Declares Camera
     Camera2D camera = {0};

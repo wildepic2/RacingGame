@@ -7,6 +7,8 @@
 #include <stdlib.h>
 #include "state.h"
 
+// Loads the highscore from file storage into the highscore global variable
+// If the file doesn't exist, the default highscore remains unchanged
 void loadHighScore() {
     FILE *fptr;
     fptr = fopen("highscore.txt", "r");
@@ -18,6 +20,7 @@ void loadHighScore() {
     }
 }
 
+// Saves the current race time to highscore file if it beats the previous best
 void autosaveHighscore() {
     if (stoppWatchTime < highscore) {
         FILE *fptr;

@@ -18,7 +18,8 @@
 #include "playerCarManager.h"
 #include "state.h"
 
-//Runs on every frame
+// Main game loop - executes every frame during active gameplay
+// Handles map rendering, player input, checkpoint detection, round management, and finish line crossing
 void whilePlaying(Vector2 *playerPos, Camera2D *camera) {
     loadHighScore();
     countdownFun();
@@ -48,7 +49,8 @@ void whilePlaying(Vector2 *playerPos, Camera2D *camera) {
     }
 }
 
-//Runs every frame when the gameState is Gameover
+// Handles game over state - resets game variables and transitions back to menu
+// Clears round count, timer, and repositions player car to start position
 void gameOver(Vector2 *playerPos) {
     currentRound = 0;
     lassPassTime = 0;
@@ -56,7 +58,8 @@ void gameOver(Vector2 *playerPos) {
     resetCar(playerPos);
 }
 
-//Runs on init game
+// Initializes the game on startup - loads textures, parses map data, and loads highscore
+// Sets up all game resources and state required before gameplay begins
 void initGame() {
     //Inits the Game Textures
     initTextures();

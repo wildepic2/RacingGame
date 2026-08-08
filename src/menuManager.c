@@ -10,6 +10,8 @@
 #include "raylib.h"
 #include "state.h"
 
+// Renders the background for menus - draws grass tiles and a car sprite
+// Used as a backdrop for both main menu and game over screen
 void background() {
     DrawTexture(textures[0], 0, 0, WHITE);
     DrawTexture(textures[0], 0, 382, WHITE);
@@ -26,6 +28,9 @@ void background() {
     DrawTexture(textures[11], 350, 320, WHITE);
 }
 
+// Displays the main menu screen with title, controls, and enables dev mode activation
+// Dev mode is activated by pressing LEFT and RIGHT arrows simultaneously
+// Game starts when player presses any movement key
 void displayMainMenu() {
     background();
 
@@ -50,6 +55,8 @@ void displayMainMenu() {
     }
 }
 
+// Displays the game over screen with final time, best time, and play again button
+// Button press transitions back to PLAYING state and resets the stopwatch
 void displayGameoverMenu() {
     background();
 

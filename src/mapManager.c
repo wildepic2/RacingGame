@@ -23,7 +23,8 @@ int originY = 0;
 Vector3 startMark;
 Vector3 finishMark;
 
-//Loads the map string into the mapTextureLocation Matrix
+// Parses the hardcoded map string into a 2D tile array and extracts map metadata
+// Extracts map origin, start mark position/direction, and finish mark position/direction
 void mapStringParser() {
     int j = 0;
     for (int i = 0; i < 100; i++) {
@@ -38,8 +39,9 @@ void mapStringParser() {
     finishMark = (Vector3){mapString[j + 5], mapString[j + 6], mapString[j + 7]};
 }
 
+// Renders the start and finish line marks on the map at their defined positions
+// Only draws marks if they are defined (not -1 in z-coordinate)
 void drawMarks(Vector2 *pos) {
-    //Draws marks
     int texture = startMark.z + 7;
     if (startMark.z != -1) {
         DrawTexture(textures[texture], ((startMark.x * gridWidth) - pos->x) + 20 + originX,
@@ -54,8 +56,9 @@ void drawMarks(Vector2 *pos) {
     }
 }
 
+// Renders the entire game map including grass background and road tiles
+// Applies camera offset so the map moves relative to the player's position
 void drawMap(Vector2 *pos) {
-    //Draws the grass around the map that you dont see anything white
     for (int i = -2; i < mapWidth + 2; i++) {
         for (int ii = -2; ii < mapHeight + 2; ii++) {
             if (isDev == false) {

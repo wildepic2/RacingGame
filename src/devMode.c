@@ -17,7 +17,8 @@ int currentTexture = 0;
 int currentMode = 0;
 int currentMark = 0;
 
-//Resets map in dev mode to the absolute basics
+// Resets the entire map to blank grass tiles when 'R' is pressed
+// Clears all track tiles, marks, and origin coordinates
 void resetMap() {
     if (IsKeyPressed(KEY_R)) {
         for (int i = 0; i < 100; i++) {
@@ -34,7 +35,8 @@ void resetMap() {
     }
 }
 
-//Exports the map as map string
+// Exports the current map configuration as a string to console output (F1 key)
+// Outputs map tile data, origin coordinates, and mark positions for map persistence
 void exportMap() {
     if (IsKeyPressed(KEY_F1)) {
         printf("\n\n\n\n\n\n\n\n\n");
@@ -54,7 +56,7 @@ void exportMap() {
     }
 }
 
-//Select texture
+// Cycles through available tile textures with UP/DOWN arrow keys in dev mode
 void selectTexture() {
     if (IsKeyPressed(KEY_UP)) {
         if (currentTexture < 6) {
@@ -68,7 +70,7 @@ void selectTexture() {
     }
 }
 
-//Allows to change the origin of the grids
+// Allows entering new map origin coordinates via keyboard input (O key)
 void enterOrigin() {
     if (IsKeyDown(KEY_O)) {
         printf("Enter new Origin X: ");
@@ -80,7 +82,7 @@ void enterOrigin() {
     }
 }
 
-//Text shown in dev mode
+// Renders dev mode UI text showing current mode and selected texture information
 void drawDevModeText(Vector2 *pos) {
     DrawText("DEV MODUS", pos->x - 200, pos->y + 290, 80, BLACK);
     DrawText(TextFormat("Current MODE: "), pos->x - 355, pos->y - 300, 40, BLACK);
@@ -95,7 +97,7 @@ void drawDevModeText(Vector2 *pos) {
     }
 }
 
-//Draws the selected tile on the grid where the car is located
+// Places the selected tile texture on the grid tile where the car is located (P key to place)
 void drawTexture(Vector2 *pos) {
     for (int i = 0; i < 100; i++) {
         for (int ii = 0; ii < 100; ii++) {
@@ -110,6 +112,7 @@ void drawTexture(Vector2 *pos) {
     }
 }
 
+// Dev mode layer 1 - allows placing and selecting road/terrain tiles using arrow keys and P key
 void layer1DevMode(Vector2 *pos) {
     //select texture arrow keys
     selectTexture();
@@ -119,6 +122,8 @@ void layer1DevMode(Vector2 *pos) {
     drawTexture(pos);
 }
 
+// Places a start or finish mark on the road at the car's current position
+// Automatically detects road orientation (horizontal/vertical) and sets appropriate direction
 void putMark(int i, int ii, char directionText[5]) {
     Vector3 Mark = {};
     //Checks if the road where the mark will be put if its Horizontal or Vertical
@@ -157,7 +162,7 @@ void putMark(int i, int ii, char directionText[5]) {
     }
 }
 
-//Calculates on which grid to Put the mark
+// Detects the car's current grid position and places a mark there when P is pressed
 void drawMark(Vector2 *pos, char directionText[5]) {
     //Calculates the grid square of the car
     for (int i = 0; i < 100; i++) {
@@ -174,7 +179,7 @@ void drawMark(Vector2 *pos, char directionText[5]) {
     }
 }
 
-//Makes You choose with arrow up down keys which mark to put
+// Cycles between start mark and finish mark selection using UP/DOWN arrow keys
 void chooseMark() {
     if (IsKeyPressed(KEY_UP)) {
         if (currentMark < 1) {
@@ -188,7 +193,7 @@ void chooseMark() {
     }
 }
 
-//Shows which mark you have selected
+// Displays which mark type (start or finish) is currently selected for placement
 void displaySelectedMarkText(Vector2 *pos) {
     DrawText(TextFormat("Current Mark: "), pos->x - 355, pos->y - 250, 40, BLACK);
     if (currentMark == 0) {
@@ -199,14 +204,14 @@ void displaySelectedMarkText(Vector2 *pos) {
     }
 }
 
-//Calls all functions that you can choose which mark to draw where in this mode
+// Dev mode layer 2 - handles placing start and finish marks on the race track
 void startStopMarkAddMode(Vector2 *pos, char directionText[5]) {
     chooseMark();
     displaySelectedMarkText(pos);
     drawMark(pos, directionText);
 }
 
-//Selects which mode to call
+// Routes dev mode functionality to appropriate handler based on current mode
 void modeSwitch(Vector2 *pos, char directionText[5]) {
     if (currentMode == 0) {
         layer1DevMode(pos);
@@ -215,7 +220,7 @@ void modeSwitch(Vector2 *pos, char directionText[5]) {
     }
 }
 
-//allows you to change the mode
+// Toggles between dev mode layers using LEFT/RIGHT arrow keys
 void selectMode() {
     if (IsKeyPressed(KEY_LEFT)) {
         if (currentMode < 1) {
@@ -229,7 +234,8 @@ void selectMode() {
     }
 }
 
-//It allows the car in dev modus to draw the map and export it
+// Main dev mode function - enables map editing with tile placement, mark placement, and map export
+// Provides UI for selecting textures, placing marks, and saving map changes
 void drawMapAsCar(Vector2 *pos, char directionText[5]) {
     //Resets full dev Map back to grass
     //And autosaves the just grass to the auto dev save

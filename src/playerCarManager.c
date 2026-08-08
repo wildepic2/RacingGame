@@ -37,6 +37,8 @@ bool direction[4] = {false, false, false, false};
 char directionText[6];
 int rotation = 0;
 
+// Sets the car's direction text based on the start mark's orientation during countdown
+// This determines which car sprite to display before the race begins
 void getStartMarkDirection(char directionText[]) {
     if (countdown > 0) {
         if (startMark.z == 0) {
@@ -54,6 +56,7 @@ void getStartMarkDirection(char directionText[]) {
     }
 }
 
+// Resets the car to its initial state: stops movement, clears input, and returns to starting position
 void resetCar(Vector2 *pos) {
     direction[0] = false;
     direction[1] = false;
@@ -65,7 +68,8 @@ void resetCar(Vector2 *pos) {
     pos->x = 375;
     pos->y = 375;
 }
-//Draws the player Car
+// Renders the player's car sprite at the specified position with the appropriate direction texture
+// The text parameter determines which directional car sprite to draw (up, down, left, right)
 void drawPlayerCar(Vector2 pos, char text[]) {
     if (strcmp(text, "up") == 0) {
         DrawTextureEx(textures[11], pos, rotation, 1.0f, WHITE);
@@ -78,8 +82,8 @@ void drawPlayerCar(Vector2 pos, char text[]) {
     }
 }
 
-//Makes the car speed be bigger with acceleration until it reaches max speed
-//Acceleration will only then get bigger if you press one button move keys
+// Increases car speed when movement keys are pressed, up to the maximum speed limit
+// Speed increment per frame is defined by accelerationSpeedFrame constant
 void carAcceleration(float *speed) {
     if (IsKeyDown(KEY_A) || IsKeyDown(KEY_D) || IsKeyDown(KEY_W) || IsKeyDown(KEY_S)) {
         if (*speed < maxSpeed) {
@@ -88,8 +92,8 @@ void carAcceleration(float *speed) {
     }
 }
 
-//Makes the car brake with brake speed until car has no speed
-//Because it often goes into minus whats an problem when its minus it auto sets the speed 0
+// Applies braking when SPACE is pressed, decelerating the car at a faster rate than natural coasting
+// Prevents speed from going negative by clamping to zero
 void carBrake(float *speed) {
     if (*speed <= 0) {
         speed = 0;
@@ -98,6 +102,8 @@ void carBrake(float *speed) {
     }
 }
 
+// Processes player keyboard input and updates the direction array (W/A/S/D for movement, SPACE for brake)
+// direction[0]=left, direction[1]=right, direction[2]=up, direction[3]=down
 void playerInput(bool direction[4]) {
     //If you pressed one key it resets it which direction did the car move
     if (IsKeyDown(KEY_A) || IsKeyDown(KEY_D) || IsKeyDown(KEY_W) || IsKeyDown(KEY_S)) {
@@ -128,6 +134,8 @@ void playerInput(bool direction[4]) {
     }
 }
 
+// Updates the car's position based on current speed and direction flags
+// Applies movement in pixels per frame according to the speed variable
 void carMovement(Vector2 *pos, bool direction[4]) {
     //Make the car with the speed move into the direction
     //Left
@@ -148,7 +156,8 @@ void carMovement(Vector2 *pos, bool direction[4]) {
     }
 }
 
-//Coasting with an bit of disacceleration
+// Applies natural deceleration (coasting) when no movement keys are pressed
+// Simulates friction, gradually slowing the car to a stop
 void carDisacceleration(float *speed) {
     if (!IsKeyDown(KEY_A) && !IsKeyDown(KEY_D) && !IsKeyDown(KEY_W) && !IsKeyDown(KEY_S)) {
         if (*speed > 0) {
@@ -159,7 +168,8 @@ void carDisacceleration(float *speed) {
     }
 }
 
-//sets the direction of the car where to move
+// Determines the car's direction text and rotation angle based on which movement keys are pressed
+// Handles both cardinal and diagonal directions (with 45-degree rotation for diagonals)
 void carDirection(char directionText[], bool direction[4]) {
     rotation = 0;
     strcpy(directionText, "up");
@@ -201,11 +211,15 @@ void carDirection(char directionText[], bool direction[4]) {
     }
 }
 
+// Updates the camera position to follow the player's car, keeping it centered on screen
+// The camera offset positions the car in the middle of the 800x800 window
 void updateCamera(Camera2D *camera, Vector2 *pos) {
     camera->target = (Vector2){pos->x, pos->y};
     camera->offset = (Vector2){375, 375};
 }
 
+// Prevents the car from leaving the map boundaries by stopping it and pushing it back inside
+// Checks all four edges and applies appropriate corrections
 void stopCarLeavingMap(Vector2 *pos) {
     if (pos->x + 386 < originX) {
         speed = 0;
@@ -225,7 +239,8 @@ void stopCarLeavingMap(Vector2 *pos) {
     }
 }
 
-//Make the car only driving the maxgrasspeed from the moment it drives on grass
+// Applies a speed penalty when the car drives on grass (tile type 0)
+// Limits car speed to maxGrassKMH to simulate friction on grass terrain
 void grassPenalty(Vector2 *pos , float kmhCalculated) {
     for (int i = 0; i < 100; i++) {
         for (int ii = 0; ii < 100; ii++) {
@@ -241,7 +256,8 @@ void grassPenalty(Vector2 *pos , float kmhCalculated) {
     }
 }
 
-//All functions for Player Car
+// Main function that handles all player car mechanics: input, movement, rendering, and physics
+// Updates position, applies constraints (map boundaries, grass penalty), and displays car with HUD
 void playerCar(Vector2 *pos, Camera2D *camera) {
     getStartMarkDirection(directionText);
     updateCamera(camera, pos);
