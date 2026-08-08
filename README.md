@@ -101,6 +101,7 @@ RacingGame/
 | **P** | Place selected texture at car position |
 | **F1** | Export map as string (console output) |
 | **R** | Reset map to all grass |
+| **O** | Change map origin offset (X, Y coordinates) |
 | **WASD** | Navigate map with car |
 | **Space** | Brake (for precise placement) |
 | **ESC** | Exit to menu |
@@ -212,6 +213,17 @@ The car accelerates realistically with three distinct phases:
 5. Press **P** to place the selected tile at your car position
 6. Press **F1** to export your map as a string
 7. Copy the output and add it to `mapString.c` to make it a playable track
+
+### Map Origin Offset
+
+In Dev Mode, you can adjust the map origin coordinates to offset the entire map rendering:
+
+- Press **O** to enter origin adjustment mode
+- Input the new **Origin X** coordinate (horizontal offset in pixels)
+- Input the new **Origin Y** coordinate (vertical offset in pixels)
+- This is useful for fine-tuning map positioning on the screen
+
+The origin values are automatically saved with your map and exported in the map string, allowing for precise map placement across different environments.
 
 ### Compile-Time Configuration
 
